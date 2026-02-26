@@ -1,4 +1,4 @@
-.about-section {
+/* .about-section {
   padding: 4rem 2rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #e9eef5 100%);
   font-family: 'Poppins', sans-serif;
@@ -127,7 +127,7 @@
 }
 
 /* Values Section */
-.values-section {
+/* .values-section {
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -280,4 +280,4 @@
     transform: translateY(0);
     opacity: 1;
   }
-}
+} */ 

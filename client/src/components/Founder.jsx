@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import './Founder.css';
+import founderPhoto from '../assets/images/DAD_pic_linkedin.png';
 
 const Founder = () => {
   const imgRef = useRef(null);
@@ -26,12 +27,12 @@ const Founder = () => {
     <section className="founder-section">
       <div className="founder-inner">
         <div className="founder-photo">
-          <img ref={imgRef} src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=800&fit=crop" alt="Founder" />
+          <img ref={imgRef} src={founderPhoto} alt="Founder" />
         </div>
         <div className="founder-bio">
           <h2>Meet Our Founder</h2>
-          <h3>Priya Sharma — Founder & CEO</h3>
-          <p>Priya is a software engineer and educator with over 12 years' experience building teams and teaching practical software skills.</p>
+          <h3>Harcharan Singh Sondhi — Founder & CEO</h3>
+          <p>Harcharan is a visionary leader and educator with over 12 years' experience in building teams and teaching practical software skills</p>
         </div>
       </div>
     </section>

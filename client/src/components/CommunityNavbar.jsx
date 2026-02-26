@@ -31,9 +31,9 @@ const CommunityNavbar = () => {
               <button className="community-link-btn">Community Overview ▾</button>
               {openDropdown === 'overview' && (
                 <div className="community-dropdown-menu">
-                  <Link to="/community/about">About Community</Link>
-                  <Link to="/community/values">Community Values</Link>
-                  <Link to="/community/impact">Community Impact</Link>
+                  <Link to="/community#community-overview">About Community</Link>
+                  <Link to="/community#community-values">Community Values</Link>
+                  <Link to="/community#community-impact">Community Impact</Link>
                 </div>
               )}
             </li>
@@ -46,9 +46,9 @@ const CommunityNavbar = () => {
               <button className="community-link-btn">Initiatives ▾</button>
               {openDropdown === 'initiatives' && (
                 <div className="community-dropdown-menu">
-                  <Link to="/community/initiatives/mentorship">Mentorship Program</Link>
-                  <Link to="/community/initiatives/events">Community Events</Link>
-                  <Link to="/community/initiatives/projects">Collaborative Projects</Link>
+                  <Link to="/community#community-initiatives">Mentorship Program</Link>
+                  <Link to="/community#community-initiatives">Community Events</Link>
+                  <Link to="/community#community-initiatives">Collaborative Projects</Link>
                 </div>
               )}
             </li>
@@ -61,15 +61,15 @@ const CommunityNavbar = () => {
               <button className="community-link-btn">Members ▾</button>
               {openDropdown === 'members' && (
                 <div className="community-dropdown-menu">
-                  <Link to="/community/members/directory">Member Directory</Link>
-                  <Link to="/community/members/success-stories">Success Stories</Link>
-                  <Link to="/community/members/ambassadors">Community Ambassadors</Link>
+                  <Link to="/community#community-members">Member Directory</Link>
+                  <Link to="/community#community-members">Success Stories</Link>
+                  <Link to="/community#community-members">Community Ambassadors</Link>
                 </div>
               )}
             </li>
 
             <li className="community-nav-item">
-              <Link to="/community/contact">Contact / Join Us</Link>
+              <Link to="/contact">Contact / Join Us</Link>
             </li>
           </ul>
         </div>
@@ -89,3 +89,5 @@ const CommunityNavbar = () => {
 };
 
 export default CommunityNavbar;
+
+

@@ -103,7 +103,7 @@ const Community = () => {
       </section>
 
       {/* Confidence Pathways */}
-      <section className="community-about">
+      <section id="community-overview" className="community-about">
         <div className="section-container">
           <h2>AILYT Confidence Pathway</h2>
           <p className="section-subtitle">Focus on confidence, not grammar. Build practical speaking skills through practice and supportive feedback</p>
@@ -124,7 +124,7 @@ const Community = () => {
       </section>
 
       {/* Club Roles Section */}
-      <section className="community-initiatives">
+      <section id="community-initiatives" className="community-initiatives">
         <div className="section-container">
           <h2>🎭 Club Roles</h2>
           <p className="section-subtitle">Every meeting works smoothly because members take simple, rotating roles</p>
@@ -143,7 +143,7 @@ const Community = () => {
       </section>
 
       {/* Meeting Details */}
-      <section className="community-members">
+      <section id="community-members" className="community-members">
         <div className="section-container">
           <h2>Meeting Details & Structure</h2>
           <p className="section-subtitle">Frequency, duration, and standard meeting flow</p>
@@ -188,7 +188,7 @@ const Community = () => {
       </section>
 
       {/* Club Rules Section */}
-      <section className="community-about">
+      <section id="community-values" className="community-about">
         <div className="section-container">
           <h2>Club Rules & Values</h2>
           <p className="section-subtitle">Principles that make our community safe, supportive, and effective</p>
@@ -205,7 +205,7 @@ const Community = () => {
       </section>
 
       {/* Club Purpose Section */}
-      <section className="community-features">
+      <section id="community-impact" className="community-features">
         <div className="section-container">
           <h2>Club Purpose & Benefits</h2>
           <p className="section-subtitle">What you'll gain from joining AILYT Speaking & Confidence Club</p>
@@ -236,13 +236,13 @@ const Community = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="community-cta">
+      <section id="community-contact" className="community-cta">
         <div className="section-container">
           <h2>Join the AILYT Speaking & Confidence Club</h2>
           <p>Want to participate in the next meeting? Send us your details and we'll share the schedule and speaking slots</p>
           <div className="cta-buttons">
             <button className="cta-primary">Register Now</button>
-            <Link to="/community/contact" className="cta-secondary">Contact Us</Link>
+            <Link to="/contact" className="cta-secondary">Contact Us</Link>
           </div>
           
           <div className="contact-info mt-50">
@@ -269,3 +269,6 @@ const Community = () => {
 };
 
 export default Community;
+
+
+

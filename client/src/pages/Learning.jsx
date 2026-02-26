@@ -95,7 +95,7 @@ const Learning = () => {
       </section>
 
       {/* Why AILYT Learning */}
-      <section className="learning-why">
+      <section id="learning-why" className="learning-why">
         <div className="section-container">
           <h2>Why AILYT Learning Centre</h2>
           <p className="section-subtitle">We provide the foundation for your success</p>
@@ -115,7 +115,7 @@ const Learning = () => {
       </section>
 
       {/* Courses Section */}
-      <section className="learning-courses">
+      <section id="learning-courses" className="learning-courses">
         <div className="section-container">
           <h2>Our Courses</h2>
           <p className="section-subtitle">Explore our wide range of professional courses</p>
@@ -134,7 +134,7 @@ const Learning = () => {
                     </li>
                   ))}
                 </ul>
-                <Link to="/courses" className="course-link">View Details</Link>
+                <Link to="/contact" className="course-link">View Details</Link>
               </div>
             ))}
           </div>
@@ -142,7 +142,7 @@ const Learning = () => {
       </section>
 
       {/* Internship Programs */}
-      <section className="learning-internships">
+      <section id="learning-internships" className="learning-internships">
         <div className="section-container">
           <h2>Internship Programs</h2>
           <p className="section-subtitle">Gain real-world experience and accelerate your career</p>
@@ -193,7 +193,7 @@ const Learning = () => {
       </section>
 
       {/* About Learning Centre */}
-      <section className="learning-about">
+      <section id="learning-about" className="learning-about">
         <div className="section-container">
           <div className="about-content">
             <div className="about-text">
@@ -220,7 +220,7 @@ const Learning = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="learning-cta">
+      <section id="learning-contact" className="learning-cta">
         <div className="section-container">
           <h2>Ready to Transform Your Career?</h2>
           <p>Start your learning journey with AILYT today</p>
@@ -245,3 +245,4 @@ const Learning = () => {
 };
 
 export default Learning;
+

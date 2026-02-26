@@ -45,9 +45,9 @@ const LearningNavbar = () => {
                     </button>
                     {openSubmenu === 'english' && (
                       <div className="learning-submenu">
-                        <Link to="/learning/courses#spoken-english">Spoken English</Link>
-                        <Link to="/learning/courses#confidence">Confidence Building</Link>
-                        <Link to="/learning/courses#interview">Interview Skills</Link>
+                        <Link to="/learning#learning-courses">Spoken English</Link>
+                        <Link to="/learning#learning-courses">Confidence Building</Link>
+                        <Link to="/learning#learning-courses">Interview Skills</Link>
                       </div>
                     )}
                   </div>
@@ -61,9 +61,9 @@ const LearningNavbar = () => {
                     </button>
                     {openSubmenu === 'computer' && (
                       <div className="learning-submenu">
-                        <Link to="/learning/courses#ccc">CCC</Link>
-                        <Link to="/learning/courses#olevel">O-Level</Link>
-                        <Link to="/learning/courses#basic-computers">Basic Computers</Link>
+                        <Link to="/learning#learning-courses">CCC</Link>
+                        <Link to="/learning#learning-courses">O-Level</Link>
+                        <Link to="/learning#learning-courses">Basic Computers</Link>
                       </div>
                     )}
                   </div>
@@ -77,10 +77,10 @@ const LearningNavbar = () => {
                     </button>
                     {openSubmenu === 'data' && (
                       <div className="learning-submenu">
-                        <Link to="/learning/courses#excel">Excel</Link>
-                        <Link to="/learning/courses#python">Python</Link>
-                        <Link to="/learning/courses#data-analytics">Data Analytics</Link>
-                        <Link to="/learning/courses#tableau">Tableau</Link>
+                        <Link to="/learning#learning-courses">Excel</Link>
+                        <Link to="/learning#learning-courses">Python</Link>
+                        <Link to="/learning#learning-courses">Data Analytics</Link>
+                        <Link to="/learning#learning-courses">Tableau</Link>
                       </div>
                     )}
                   </div>
@@ -96,9 +96,9 @@ const LearningNavbar = () => {
               <button className="learning-link-btn">Internship Programs ▾</button>
               {openDropdown === 'internships' && (
                 <div className="learning-dropdown-menu">
-                  <Link to="/learning/internship-programs#6month">6-Month Internship Model</Link>
-                  <Link to="/learning/internship-programs#tech-tracks">Tech Tracks</Link>
-                  <Link to="/learning/internship-programs#tools">Tools & Workflow</Link>
+                  <Link to="/learning#learning-internships">6-Month Internship Model</Link>
+                  <Link to="/learning#learning-internships">Tech Tracks</Link>
+                  <Link to="/learning#learning-internships">Tools & Workflow</Link>
                 </div>
               )}
             </li>
@@ -111,14 +111,18 @@ const LearningNavbar = () => {
               <button className="learning-link-btn">About Learning Centre ▾</button>
               {openDropdown === 'about' && (
                 <div className="learning-dropdown-menu">
-                  <Link to="/learning/about#methodology">Teaching Methodology</Link>
-                  <Link to="/learning/about#infrastructure">Infrastructure (Smart Board, Hybrid)</Link>
+                  <Link to="/learning#learning-about">Teaching Methodology</Link>
+                  <Link to="/learning#learning-about">Infrastructure (Smart Board, Hybrid)</Link>
                 </div>
               )}
             </li>
 
             <li className="learning-nav-item">
-              <Link to="/learning/contact">Contact / Enquiry</Link>
+              <Link to="/contact">Contact / Enquiry</Link>
+            </li>
+
+            <li className="learning-nav-item">
+              <Link to="/contact">Company Enquiries</Link>
             </li>
           </ul>
         </div>
@@ -138,3 +142,4 @@ const LearningNavbar = () => {
 };
 
 export default LearningNavbar;
+

@@ -71,7 +71,7 @@ const ITServices = () => {
       </section>
 
       {/* Services Overview */}
-      <section className="itservices-services-overview">
+      <section id="itservices-services" className="itservices-services-overview">
         <div className="section-container">
           <h2>Our Services</h2>
           <p className="section-subtitle">Comprehensive IT solutions for every business need</p>
@@ -82,7 +82,7 @@ const ITServices = () => {
                 <div className="service-icon">{index + 1}</div>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-                <Link to="/it-services/services" className="service-link">Learn More →</Link>
+                <Link to="/contact" className="service-link">Learn More →</Link>
               </div>
             ))}
           </div>
@@ -90,7 +90,7 @@ const ITServices = () => {
       </section>
 
       {/* Industries Served */}
-      <section className="itservices-industries">
+      <section id="itservices-industries" className="itservices-industries">
         <div className="section-container">
           <h2>Industries Served</h2>
           <p className="section-subtitle">Proven expertise across diverse sectors</p>
@@ -149,7 +149,7 @@ const ITServices = () => {
       </section>
 
       {/* Projects & Case Studies */}
-      <section className="itservices-projects">
+      <section id="itservices-projects" className="itservices-projects">
         <div className="section-container">
           <h2>Projects & Case Studies</h2>
           <p className="section-subtitle">Real-world examples of our work</p>
@@ -158,24 +158,24 @@ const ITServices = () => {
             <div className="project-card">
               <h3>Real Health App</h3>
               <p>Healthcare platform connecting patients and providers</p>
-              <Link to="/it-services/projects">View Case Study →</Link>
+              <Link to="/contact">View Case Study →</Link>
             </div>
             <div className="project-card">
               <h3>Insurance Demos</h3>
               <p>Interactive insurance solutions and prototypes</p>
-              <Link to="/it-services/projects">View Case Study →</Link>
+              <Link to="/contact">View Case Study →</Link>
             </div>
             <div className="project-card">
               <h3>Sample MVPs</h3>
               <p>Successful MVP launches for early-stage companies</p>
-              <Link to="/it-services/projects">View Case Study →</Link>
+              <Link to="/contact">View Case Study →</Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Hire Interns */}
-      <section className="itservices-hire-interns">
+      <section id="itservices-hire-interns" className="itservices-hire-interns">
         <div className="section-container">
           <div className="hire-content">
             <div className="hire-text">
@@ -187,7 +187,7 @@ const ITServices = () => {
                 <li>Cost-effective resource augmentation</li>
                 <li>Direct oversight and quality assurance</li>
               </ul>
-              <Link to="/it-services/hire-interns" className="cta-primary">Learn More</Link>
+              <Link to="/contact" className="cta-primary">Learn More</Link>
             </div>
             <div className="hire-visual">
               <div className="hire-box hire-box-1"></div>
@@ -198,13 +198,13 @@ const ITServices = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="itservices-cta">
+      <section id="itservices-contact" className="itservices-cta">
         <div className="section-container">
           <h2>Ready to Transform Your Digital Infrastructure?</h2>
           <p>Let's work together to build solutions that drive growth</p>
           <div className="cta-buttons">
             <button className="cta-primary">Schedule Consultation</button>
-            <Link to="/it-services/contact" className="cta-secondary">Get in Touch</Link>
+            <Link to="/contact" className="cta-secondary">Get in Touch</Link>
           </div>
         </div>
       </section>
@@ -213,3 +213,4 @@ const ITServices = () => {
 };
 
 export default ITServices;
+

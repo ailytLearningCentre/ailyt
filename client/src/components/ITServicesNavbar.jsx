@@ -31,13 +31,13 @@ const ITServicesNavbar = () => {
               <button className="itservices-link-btn">Services ▾</button>
               {openDropdown === 'services' && (
                 <div className="itservices-dropdown-menu">
-                  <Link to="/it-services/services">All Services</Link>
-                  <Link to="/it-services/services#web">Web Development</Link>
-                  <Link to="/it-services/services#mobile">Mobile App Development</Link>
-                  <Link to="/it-services/services#mvp">MVP Development</Link>
-                  <Link to="/it-services/services#reltio">Reltio / MDM PoCs</Link>
-                  <Link to="/it-services/services#data">Data Analytics</Link>
-                  <Link to="/it-services/services#automation">Automation & Integrations</Link>
+                  <Link to="/it-services#itservices-services">All Services</Link>
+                  <Link to="/it-services#itservices-services">Web Development</Link>
+                  <Link to="/it-services#itservices-services">Mobile App Development</Link>
+                  <Link to="/it-services#itservices-services">MVP Development</Link>
+                  <Link to="/it-services#itservices-services">Reltio / MDM PoCs</Link>
+                  <Link to="/it-services#itservices-services">Data Analytics</Link>
+                  <Link to="/it-services#itservices-services">Automation & Integrations</Link>
                 </div>
               )}
             </li>
@@ -50,25 +50,25 @@ const ITServicesNavbar = () => {
               <button className="itservices-link-btn">Industries ▾</button>
               {openDropdown === 'industries' && (
                 <div className="itservices-dropdown-menu">
-                  <Link to="/it-services/industries">All Industries</Link>
-                  <Link to="/it-services/industries#insurance">Insurance</Link>
-                  <Link to="/it-services/industries#education">Education</Link>
-                  <Link to="/it-services/industries#startups">Startups</Link>
-                  <Link to="/it-services/industries#smes">SMEs</Link>
+                  <Link to="/it-services#itservices-industries">All Industries</Link>
+                  <Link to="/it-services#itservices-industries">Insurance</Link>
+                  <Link to="/it-services#itservices-industries">Education</Link>
+                  <Link to="/it-services#itservices-industries">Startups</Link>
+                  <Link to="/it-services#itservices-industries">SMEs</Link>
                 </div>
               )}
             </li>
 
             <li className="itservices-nav-item">
-              <Link to="/it-services/projects">Projects</Link>
+              <Link to="/it-services#itservices-projects">Projects</Link>
             </li>
 
             <li className="itservices-nav-item">
-              <Link to="/it-services/hire-interns">Hire Interns</Link>
+              <Link to="/it-services#itservices-hire-interns">Hire Interns</Link>
             </li>
 
             <li className="itservices-nav-item">
-              <Link to="/it-services/contact">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </div>
@@ -88,3 +88,4 @@ const ITServicesNavbar = () => {
 };
 
 export default ITServicesNavbar;
+

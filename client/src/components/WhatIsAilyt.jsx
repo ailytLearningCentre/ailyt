@@ -25,7 +25,7 @@ const WhatIsAilyt = () => {
     <section className="what-section">
       <div className="what-inner">
         <div className="what-content">
-          <h2>What is AILYT</h2>
+          <h2>Who we are</h2>
           <p>AILYT is an education and IT-services ecosystem focused on practical skills, project-based learning and career acceleration.</p>
         </div>
 

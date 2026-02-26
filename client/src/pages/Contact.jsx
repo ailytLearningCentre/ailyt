@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import '../styles/Contact.css';
 
+const FALLBACK_EMAIL = 'info@ailyt.com';
+const WHATSAPP_API_BASE = 'https://api.callmebot.com/whatsapp.php';
+const WHATSAPP_PHONE = process.env.REACT_APP_CALLMEBOT_PHONE || '';
+const WHATSAPP_API_KEY = process.env.REACT_APP_CALLMEBOT_API_KEY || '';
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -19,10 +24,45 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would send the form data to your backend
-    console.log('Form submitted:', formData);
+
+    const whatsappMessage = [
+      'New lead from AILYT website',
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Subject: ${formData.subject}`,
+      'Message:',
+      formData.message
+    ].join('\n');
+
+    const mailSubject = `Website Lead: ${formData.subject}`;
+    const mailBody = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      '',
+      'Message:',
+      formData.message
+    ].join('\n');
+    const mailtoUrl = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+    let sentToWhatsapp = false;
+
+    if (WHATSAPP_PHONE && WHATSAPP_API_KEY) {
+      const whatsappApiUrl = `${WHATSAPP_API_BASE}?phone=${encodeURIComponent(WHATSAPP_PHONE)}&text=${encodeURIComponent(whatsappMessage)}&apikey=${encodeURIComponent(WHATSAPP_API_KEY)}`;
+
+      try {
+        const response = await fetch(whatsappApiUrl, { method: 'GET' });
+        sentToWhatsapp = response.ok;
+      } catch (error) {
+        sentToWhatsapp = false;
+      }
+    }
+
+    if (!sentToWhatsapp) {
+      window.location.href = mailtoUrl;
+    }
+
     setSubmitted(true);
     setFormData({ name: '', email: '', subject: '', message: '' });
     setTimeout(() => setSubmitted(false), 5000);
@@ -141,3 +181,7 @@ const Contact = () => {
 };
 
 export default Contact;
+
+
+
+
