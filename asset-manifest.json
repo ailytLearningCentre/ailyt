@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8b5b3519.css",
+    "main.js": "/static/js/main.e7d810cd.js",
+    "static/media/jpg": "/static/media/3a61d803b23fc77c5df360a8c0a2fe8a.255e2e6cb32d0debbf9d.jpg",
+    "static/media/DAD_pic_linkedin.png": "/static/media/DAD_pic_linkedin.cf2e9e5e441d5db8261d.png",
+    "static/media/AILYTLOGOPNG.png": "/static/media/AILYTLOGOPNG.b26fcad4ac525a42c5dc.png",
+    "index.html": "/index.html",
+    "main.8b5b3519.css.map": "/static/css/main.8b5b3519.css.map",
+    "main.e7d810cd.js.map": "/static/js/main.e7d810cd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8b5b3519.css",
+    "static/js/main.e7d810cd.js"
+  ]
+}
