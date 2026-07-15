@@ -16,6 +16,8 @@ import ITServices from './pages/ITServices';
 import ITServicesServices from './pages/ITServicesServices';
 import ITServicesIndustries from './pages/ITServicesIndustries';
 import ITServicesProjects from './pages/ITServicesProjects';
+import ITServicesInterns from './pages/ITServicesInterns';
+import ITServicesInternProfile from './pages/ITServicesInternProfile';
 import ITServicesHireInterns from './pages/ITServicesHireInterns';
 import ITServicesContact from './pages/ITServicesContact';
 import Community from './pages/Community';
@@ -57,6 +59,8 @@ function Main() {
         <Route path="/it-services/services" element={<ITServicesServices />} />
         <Route path="/it-services/industries" element={<ITServicesIndustries />} />
         <Route path="/it-services/projects" element={<ITServicesProjects />} />
+        <Route path="/it-services/interns" element={<ITServicesInterns />} />
+        <Route path="/it-services/interns/:slug" element={<ITServicesInternProfile />} />
         <Route path="/it-services/hire-interns" element={<ITServicesHireInterns />} />
         <Route path="/it-services/contact" element={<ITServicesContact />} />
         <Route path="/community" element={<Community />} />
@@ -74,3 +78,4 @@ function Main() {
 }
 
 export default App;
+

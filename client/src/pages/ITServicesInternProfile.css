@@ -1,0 +1,290 @@
+.intern-profile-page {
+  min-height: 100vh;
+  padding: 125px 8% 80px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(214, 47, 216, 0.2),
+      transparent 32%
+    ),
+    #0d0d15;
+  color: #ffffff;
+}
+
+.intern-profile-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.back-to-interns {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: #eb52e7;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-to-interns:hover {
+  text-decoration: underline;
+}
+
+.intern-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding: 35px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(226, 62, 220, 0.35);
+  border-radius: 20px;
+  background: rgba(24, 24, 37, 0.92);
+}
+
+.intern-profile-photo {
+  display: flex;
+  width: 170px;
+  height: 170px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e23edc;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d937db, #762485);
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.intern-profile-label {
+  margin-bottom: 8px;
+  color: #ed70e9;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.intern-profile-heading h1 {
+  margin: 0 0 10px;
+  color: #ed43e4;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+}
+
+.intern-profile-role {
+  margin-bottom: 18px;
+  color: #d0d0da;
+  font-size: 1.2rem;
+}
+
+.intern-profile-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  color: #b7b7c2;
+}
+
+.available-badge {
+  padding: 7px 13px;
+  border: 1px solid rgba(57, 218, 129, 0.5);
+  border-radius: 999px;
+  background: rgba(57, 218, 129, 0.12);
+  color: #5be398;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.intern-profile-content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.intern-profile-card {
+  padding: 28px;
+  border: 1px solid rgba(226, 62, 220, 0.25);
+  border-radius: 16px;
+  background: rgba(24, 24, 37, 0.9);
+}
+
+.intern-profile-card h2 {
+  margin: 0 0 16px;
+  color: #ee52e8;
+  font-size: 1.35rem;
+}
+
+.intern-profile-card p {
+  margin: 0;
+  color: #c4c4ce;
+  line-height: 1.8;
+}
+
+.profile-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.profile-skills span {
+  padding: 8px 12px;
+  border: 1px solid rgba(226, 62, 220, 0.4);
+  border-radius: 999px;
+  color: #f181ed;
+  font-size: 0.85rem;
+}
+
+.profile-projects {
+  margin: 0;
+  padding-left: 20px;
+  color: #c4c4ce;
+}
+
+.profile-projects li {
+  margin-bottom: 10px;
+}
+
+.intern-profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.intern-profile-links a,
+.disabled-profile-link {
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.intern-profile-links a {
+  background: linear-gradient(90deg, #d937db, #ef41ae);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.disabled-profile-link {
+  border: 1px solid #3d3d4d;
+  color: #777786;
+}
+
+@media (max-width: 750px) {
+  .intern-profile-page {
+    padding: 105px 20px 60px;
+  }
+
+  .intern-profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .intern-profile-status {
+    justify-content: center;
+  }
+
+  .intern-profile-content {
+    grid-template-columns: 1fr;
+  }
+}
+.intern-details-table-wrapper {
+  overflow: hidden;
+  border: 1px solid rgba(226, 62, 220, 0.35);
+  border-radius: 18px;
+  background: rgba(24, 24, 37, 0.92);
+}
+
+.intern-details-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.intern-details-table th,
+.intern-details-table td {
+  padding: 22px 24px;
+  border-bottom: 1px solid rgba(226, 62, 220, 0.2);
+  text-align: left;
+  vertical-align: top;
+}
+
+.intern-details-table tr:last-child th,
+.intern-details-table tr:last-child td {
+  border-bottom: none;
+}
+
+.intern-details-table th {
+  width: 240px;
+  background: rgba(226, 62, 220, 0.08);
+  color: #ee52e8;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.intern-details-table td {
+  color: #c9c9d3;
+  line-height: 1.75;
+}
+
+.profile-table-link {
+  display: inline-block;
+  padding: 9px 15px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #d937db, #ef41ae);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.profile-table-link:hover {
+  filter: brightness(1.1);
+}
+
+.table-not-available {
+  color: #777786;
+  font-style: italic;
+}
+
+.table-availability {
+  display: inline-block;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.table-availability.available {
+  border: 1px solid rgba(57, 218, 129, 0.5);
+  background: rgba(57, 218, 129, 0.12);
+  color: #5be398;
+}
+
+.table-availability.unavailable {
+  border: 1px solid rgba(255, 100, 100, 0.45);
+  background: rgba(255, 100, 100, 0.1);
+  color: #ff8989;
+}
+
+@media (max-width: 700px) {
+  .intern-details-table,
+  .intern-details-table tbody,
+  .intern-details-table tr,
+  .intern-details-table th,
+  .intern-details-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .intern-details-table tr {
+    border-bottom: 1px solid rgba(226, 62, 220, 0.25);
+  }
+
+  .intern-details-table tr:last-child {
+    border-bottom: none;
+  }
+
+  .intern-details-table th {
+    padding-bottom: 10px;
+    border-bottom: none;
+  }
+
+  .intern-details-table td {
+    padding-top: 5px;
+    border-bottom: none;
+  }
+}
+

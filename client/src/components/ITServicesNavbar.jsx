@@ -60,11 +60,15 @@ const ITServicesNavbar = () => {
             </li>
 
             <li className="itservices-nav-item">
-              <Link to="/it-services/projects">Projects</Link>
+             <Link to="/it-services/projects">Projects</Link>
             </li>
 
-            <li className="itservices-nav-item">
-              <Link to="/it-services/hire-interns">Hire Interns</Link>
+             <li className="itservices-nav-item">
+                <Link to="/it-services/interns">Interns</Link>
+             </li>
+
+             <li className="itservices-nav-item">
+               <Link to="/it-services/hire-interns">Hire Interns</Link>
             </li>
 
             <li className="itservices-nav-item">
@@ -88,3 +92,4 @@ const ITServicesNavbar = () => {
 };
 
 export default ITServicesNavbar;
+
