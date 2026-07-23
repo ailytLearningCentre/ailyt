@@ -27,6 +27,8 @@ jobs:
 
       - name: Build React frontend
         working-directory: client
+        env:
+          CI: "false"
         run: npm run build
 
       - name: Configure SSH
