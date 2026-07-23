@@ -1,0 +1,97 @@
+name: Deploy AILYT Website
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Build React frontend
+        working-directory: client
+        run: npm run build
+
+      - name: Configure SSH
+        shell: bash
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.HOSTINGER_SSH_KEY }}" > ~/.ssh/ailyt_deploy
+          chmod 600 ~/.ssh/ailyt_deploy
+          ssh-keyscan -p "${{ secrets.HOSTINGER_PORT }}" "${{ secrets.HOSTINGER_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Upload new build to temporary folder
+        shell: bash
+        run: |
+          ssh -i ~/.ssh/ailyt_deploy \
+            -p "${{ secrets.HOSTINGER_PORT }}" \
+            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" \
+            "rm -rf /home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp && mkdir -p /home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp"
+
+          rsync -az \
+            -e "ssh -i ~/.ssh/ailyt_deploy -p ${{ secrets.HOSTINGER_PORT }}" \
+            client/build/ \
+            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}:/home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp/"
+
+      - name: Backup current live frontend and publish new build
+        shell: bash
+        run: |
+          ssh -i ~/.ssh/ailyt_deploy \
+            -p "${{ secrets.HOSTINGER_PORT }}" \
+            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" << 'EOF'
+              set -e
+
+              LIVE="/home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html"
+              TEMP="$LIVE/deploy-temp"
+              BACKUP="$LIVE/auto-backup"
+
+              test -f "$TEMP/index.html"
+              test -d "$TEMP/static"
+
+              rm -rf "$BACKUP"
+              mkdir -p "$BACKUP"
+
+              if [ -f "$LIVE/index.html" ]; then
+                cp "$LIVE/index.html" "$BACKUP/"
+              fi
+
+              if [ -f "$LIVE/asset-manifest.json" ]; then
+                cp "$LIVE/asset-manifest.json" "$BACKUP/"
+              fi
+
+              if [ -d "$LIVE/static" ]; then
+                cp -r "$LIVE/static" "$BACKUP/"
+              fi
+
+              rm -rf "$LIVE/static"
+              cp "$TEMP/index.html" "$LIVE/index.html"
+              cp "$TEMP/asset-manifest.json" "$LIVE/asset-manifest.json"
+              cp -r "$TEMP/static" "$LIVE/static"
+
+              rm -rf "$TEMP"
+          EOF
+
+      - name: Verify deployed website
+        shell: bash
+        run: |
+          curl --fail --silent --show-error \
+            --retry 3 \
+            --retry-delay 5 \
+            https://ailyt.in/ > /dev/null
