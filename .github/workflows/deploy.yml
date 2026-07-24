@@ -35,21 +35,21 @@ jobs:
         shell: bash
         run: |
           set -e
-
           mkdir -p ~/.ssh
-
           printf '%s' "${{ secrets.HOSTINGER_SSH_KEY_B64 }}" \
             | base64 --decode \
             > ~/.ssh/ailyt_deploy
-
           chmod 600 ~/.ssh/ailyt_deploy
-
           ssh-keygen -y -f ~/.ssh/ailyt_deploy > /dev/null
-
           ssh-keyscan -H \
             -p "${{ secrets.HOSTINGER_PORT }}" \
             "${{ secrets.HOSTINGER_HOST }}" \
             >> ~/.ssh/known_hosts
+
+      - name: Show SSH key fingerprint
+        shell: bash
+        run: |
+          ssh-keygen -y -f ~/.ssh/ailyt_deploy | ssh-keygen -lf -
 
       - name: Test Hostinger SSH connection
         shell: bash
