@@ -10,6 +10,12 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      HOSTINGER_HOST: 89.117.27.253
+      HOSTINGER_PORT: "65002"
+      HOSTINGER_USERNAME: u641600243
+      LIVE_PATH: /home/u641600243/domains/ailyt.in/public_html
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,103 +37,117 @@ jobs:
           CI: "false"
         run: npm run build
 
-      - name: Configure SSH
+      - name: Verify build files
         shell: bash
         run: |
           set -e
+          test -f client/build/index.html
+          test -f client/build/asset-manifest.json
+          test -d client/build/static
+          echo "React build verified successfully"
+
+      - name: Install SSH password utility
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
+      - name: Add Hostinger to known hosts
+        shell: bash
+        run: |
           mkdir -p ~/.ssh
-          printf '%s' "${{ secrets.HOSTINGER_SSH_KEY_B64 }}" \
-            | base64 --decode \
-            > ~/.ssh/ailyt_deploy
-          chmod 600 ~/.ssh/ailyt_deploy
-          ssh-keygen -y -f ~/.ssh/ailyt_deploy > /dev/null
           ssh-keyscan -H \
-            -p "${{ secrets.HOSTINGER_PORT }}" \
-            "${{ secrets.HOSTINGER_HOST }}" \
+            -p "$HOSTINGER_PORT" \
+            "$HOSTINGER_HOST" \
             >> ~/.ssh/known_hosts
 
-      - name: Show SSH key fingerprint
+      - name: Test Hostinger connection
         shell: bash
+        env:
+          SSHPASS: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
-          ssh-keygen -y -f ~/.ssh/ailyt_deploy | ssh-keygen -lf -
-
-      - name: Test Hostinger SSH connection
-        shell: bash
-        run: |
-          ssh \
-            -o BatchMode=yes \
-            -o IdentitiesOnly=yes \
-            -i ~/.ssh/ailyt_deploy \
-            -p "${{ secrets.HOSTINGER_PORT }}" \
-            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" \
-            "echo SSH connection successful"
+          sshpass -e ssh \
+            -o BatchMode=no \
+            -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o StrictHostKeyChecking=yes \
+            -p "$HOSTINGER_PORT" \
+            "$HOSTINGER_USERNAME@$HOSTINGER_HOST" \
+            "echo Hostinger connection successful"
 
       - name: Create temporary deployment folder
         shell: bash
+        env:
+          SSHPASS: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
-          ssh \
-            -o BatchMode=yes \
-            -o IdentitiesOnly=yes \
-            -i ~/.ssh/ailyt_deploy \
-            -p "${{ secrets.HOSTINGER_PORT }}" \
-            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" \
-            "rm -rf /home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp && mkdir -p /home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp"
+          sshpass -e ssh \
+            -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o StrictHostKeyChecking=yes \
+            -p "$HOSTINGER_PORT" \
+            "$HOSTINGER_USERNAME@$HOSTINGER_HOST" \
+            "rm -rf '$LIVE_PATH/deploy-temp' && mkdir -p '$LIVE_PATH/deploy-temp'"
 
       - name: Upload React build
         shell: bash
+        env:
+          SSHPASS: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
-          tar -C client/build -czf - . | ssh \
-            -o BatchMode=yes \
-            -o IdentitiesOnly=yes \
-            -i ~/.ssh/ailyt_deploy \
-            -p "${{ secrets.HOSTINGER_PORT }}" \
-            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" \
-            "tar -xzf - -C /home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp"
+          tar -C client/build -czf - . | sshpass -e ssh \
+            -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o StrictHostKeyChecking=yes \
+            -p "$HOSTINGER_PORT" \
+            "$HOSTINGER_USERNAME@$HOSTINGER_HOST" \
+            "tar -xzf - -C '$LIVE_PATH/deploy-temp'"
 
       - name: Backup and publish frontend
         shell: bash
+        env:
+          SSHPASS: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
-          ssh \
-            -o BatchMode=yes \
-            -o IdentitiesOnly=yes \
-            -i ~/.ssh/ailyt_deploy \
-            -p "${{ secrets.HOSTINGER_PORT }}" \
-            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" << 'EOF'
+          sshpass -e ssh \
+            -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o StrictHostKeyChecking=yes \
+            -p "$HOSTINGER_PORT" \
+            "$HOSTINGER_USERNAME@$HOSTINGER_HOST" \
+            "
               set -e
 
-              LIVE="/home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html"
-              TEMP="$LIVE/deploy-temp"
-              BACKUP="$LIVE/auto-backup"
+              LIVE='$LIVE_PATH'
+              TEMP='$LIVE_PATH/deploy-temp'
+              BACKUP='$LIVE_PATH/auto-backup'
 
-              test -f "$TEMP/index.html"
-              test -f "$TEMP/asset-manifest.json"
-              test -d "$TEMP/static"
+              test -f \"\$TEMP/index.html\"
+              test -f \"\$TEMP/asset-manifest.json\"
+              test -d \"\$TEMP/static\"
 
-              rm -rf "$BACKUP"
-              mkdir -p "$BACKUP"
+              rm -rf \"\$BACKUP\"
+              mkdir -p \"\$BACKUP\"
 
-              if [ -f "$LIVE/index.html" ]; then
-                cp "$LIVE/index.html" "$BACKUP/"
+              if [ -f \"\$LIVE/index.html\" ]; then
+                cp \"\$LIVE/index.html\" \"\$BACKUP/\"
               fi
 
-              if [ -f "$LIVE/asset-manifest.json" ]; then
-                cp "$LIVE/asset-manifest.json" "$BACKUP/"
+              if [ -f \"\$LIVE/asset-manifest.json\" ]; then
+                cp \"\$LIVE/asset-manifest.json\" \"\$BACKUP/\"
               fi
 
-              if [ -d "$LIVE/static" ]; then
-                cp -r "$LIVE/static" "$BACKUP/"
+              if [ -d \"\$LIVE/static\" ]; then
+                cp -r \"\$LIVE/static\" \"\$BACKUP/\"
               fi
 
-              rm -rf "$LIVE/static"
+              rm -rf \"\$LIVE/static\"
 
-              cp "$TEMP/index.html" "$LIVE/index.html"
-              cp "$TEMP/asset-manifest.json" "$LIVE/asset-manifest.json"
-              cp -r "$TEMP/static" "$LIVE/static"
+              cp \"\$TEMP/index.html\" \"\$LIVE/index.html\"
+              cp \"\$TEMP/asset-manifest.json\" \"\$LIVE/asset-manifest.json\"
+              cp -r \"\$TEMP/static\" \"\$LIVE/static\"
 
-              rm -rf "$TEMP"
+              rm -rf \"\$TEMP\"
 
-              echo "Deployment completed successfully"
-          EOF
+              echo 'Deployment completed successfully'
+            "
 
       - name: Verify deployed website
         shell: bash
@@ -140,3 +160,5 @@ jobs:
             --retry-delay 5 \
             https://ailyt.in/ \
             > /dev/null
+
+          echo "Website verification successful"
