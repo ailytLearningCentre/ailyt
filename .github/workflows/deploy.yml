@@ -34,28 +34,63 @@ jobs:
       - name: Configure SSH
         shell: bash
         run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.HOSTINGER_SSH_KEY }}" > ~/.ssh/ailyt_deploy
-          chmod 600 ~/.ssh/ailyt_deploy
-          ssh-keyscan -p "${{ secrets.HOSTINGER_PORT }}" "${{ secrets.HOSTINGER_HOST }}" >> ~/.ssh/known_hosts
+          set -e
 
-      - name: Upload new build to temporary folder
+          mkdir -p ~/.ssh
+
+          printf '%s' "${{ secrets.HOSTINGER_SSH_KEY_B64 }}" \
+            | base64 --decode \
+            > ~/.ssh/ailyt_deploy
+
+          chmod 600 ~/.ssh/ailyt_deploy
+
+          ssh-keygen -y -f ~/.ssh/ailyt_deploy > /dev/null
+
+          ssh-keyscan -H \
+            -p "${{ secrets.HOSTINGER_PORT }}" \
+            "${{ secrets.HOSTINGER_HOST }}" \
+            >> ~/.ssh/known_hosts
+
+      - name: Test Hostinger SSH connection
         shell: bash
         run: |
-          ssh -i ~/.ssh/ailyt_deploy \
+          ssh \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
+            -i ~/.ssh/ailyt_deploy \
+            -p "${{ secrets.HOSTINGER_PORT }}" \
+            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" \
+            "echo SSH connection successful"
+
+      - name: Create temporary deployment folder
+        shell: bash
+        run: |
+          ssh \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
+            -i ~/.ssh/ailyt_deploy \
             -p "${{ secrets.HOSTINGER_PORT }}" \
             "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" \
             "rm -rf /home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp && mkdir -p /home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp"
 
-          rsync -az \
-            -e "ssh -i ~/.ssh/ailyt_deploy -p ${{ secrets.HOSTINGER_PORT }}" \
-            client/build/ \
-            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}:/home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp/"
-
-      - name: Backup current live frontend and publish new build
+      - name: Upload React build
         shell: bash
         run: |
-          ssh -i ~/.ssh/ailyt_deploy \
+          tar -C client/build -czf - . | ssh \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
+            -i ~/.ssh/ailyt_deploy \
+            -p "${{ secrets.HOSTINGER_PORT }}" \
+            "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" \
+            "tar -xzf - -C /home/${{ secrets.HOSTINGER_USERNAME }}/domains/ailyt.in/public_html/deploy-temp"
+
+      - name: Backup and publish frontend
+        shell: bash
+        run: |
+          ssh \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
+            -i ~/.ssh/ailyt_deploy \
             -p "${{ secrets.HOSTINGER_PORT }}" \
             "${{ secrets.HOSTINGER_USERNAME }}@${{ secrets.HOSTINGER_HOST }}" << 'EOF'
               set -e
@@ -65,6 +100,7 @@ jobs:
               BACKUP="$LIVE/auto-backup"
 
               test -f "$TEMP/index.html"
+              test -f "$TEMP/asset-manifest.json"
               test -d "$TEMP/static"
 
               rm -rf "$BACKUP"
@@ -83,17 +119,24 @@ jobs:
               fi
 
               rm -rf "$LIVE/static"
+
               cp "$TEMP/index.html" "$LIVE/index.html"
               cp "$TEMP/asset-manifest.json" "$LIVE/asset-manifest.json"
               cp -r "$TEMP/static" "$LIVE/static"
 
               rm -rf "$TEMP"
+
+              echo "Deployment completed successfully"
           EOF
 
       - name: Verify deployed website
         shell: bash
         run: |
-          curl --fail --silent --show-error \
+          curl \
+            --fail \
+            --silent \
+            --show-error \
             --retry 3 \
             --retry-delay 5 \
-            https://ailyt.in/ > /dev/null
+            https://ailyt.in/ \
+            > /dev/null
