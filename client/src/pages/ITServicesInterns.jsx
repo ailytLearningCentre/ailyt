@@ -1,91 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import internsData from '../data/internsData';
 import './ITServicesInterns.css';
-
-const interns = [
-  {
-    name: 'Anushka',
-    slug: 'anushka',
-    internId: 'AILYT/2026/001',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-  {
-    name: 'Gunjan Verma',
-    slug: 'gunjan-verma',
-    internId: 'AILYT/2026/002',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-  {
-    name: 'Kajal Rajput',
-    slug: 'kajal-rajput',
-    internId: 'AILYT/2026/003',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-{
-name: 'Nidhi',
-    slug: 'nidhi',
-    internId: 'AILYT/2026/004',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-
-  {
-    name: 'Rakhi',
-    slug: 'rakhi',
-    internId: 'AILYT/2026/005',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-  {
-    name: 'Ruchi Kothiyal',
-    slug: 'ruchi-kothiyal',
-    internId: 'AILYT/2026/006',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-  {
-    name: 'Saloni Ramola',
-    slug: 'saloni-ramola',
-    internId: 'AILYT/2026/007',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-  {
-    name: 'Suhani',
-    slug: 'suhani',
-    internId: 'AILYT/2026/008',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-  {
-    name: 'Vidushi Arora',
-    slug: 'vidushi-arora',
-    internId: 'AILYT/2026/009',
-    role: 'Software Development Intern',
-    batch: '2026',
-    startDate: '01 Feb 2026',
-    endDate: '31 July 2026',
-  },
-];
 
 const batchOptions = ['2026'];
 
@@ -96,7 +12,7 @@ const ITServicesInterns = () => {
   const filteredInterns = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
-    return interns.filter((intern) => {
+    return internsData.filter((intern) => {
       const matchesBatch = intern.batch === selectedBatch;
 
       const matchesSearch =
@@ -231,3 +147,4 @@ const ITServicesInterns = () => {
 };
 
 export default ITServicesInterns;
+export default internsData;
