@@ -23,7 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: client/package-lock.json
 
@@ -41,9 +41,12 @@ jobs:
         shell: bash
         run: |
           set -e
+
           test -f client/build/index.html
           test -f client/build/asset-manifest.json
           test -d client/build/static
+          test -f client/build/.htaccess
+
           echo "React build verified successfully"
 
       - name: Install SSH password utility
@@ -55,18 +58,40 @@ jobs:
       - name: Add Hostinger to known hosts
         shell: bash
         run: |
+          set -e
+
           mkdir -p ~/.ssh
-          ssh-keyscan -H \
-            -p "$HOSTINGER_PORT" \
-            "$HOSTINGER_HOST" \
-            >> ~/.ssh/known_hosts
+
+          for attempt in 1 2 3 4 5; do
+            if ssh-keyscan \
+              -T 15 \
+              -H \
+              -p "$HOSTINGER_PORT" \
+              "$HOSTINGER_HOST" \
+              >> ~/.ssh/known_hosts; then
+
+              echo "Hostinger added to known hosts"
+              exit 0
+            fi
+
+            echo "ssh-keyscan attempt $attempt failed. Retrying..."
+            sleep 5
+          done
+
+          echo "Unable to add Hostinger to known hosts"
+          exit 1
 
       - name: Test Hostinger connection
         shell: bash
         env:
           SSHPASS: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
+          set -e
+
           sshpass -e ssh \
+            -o ConnectTimeout=20 \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=3 \
             -o BatchMode=no \
             -o PreferredAuthentications=password \
             -o PubkeyAuthentication=no \
@@ -80,20 +105,34 @@ jobs:
         env:
           SSHPASS: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
+          set -e
+
           sshpass -e ssh \
+            -o ConnectTimeout=20 \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=3 \
             -o PreferredAuthentications=password \
             -o PubkeyAuthentication=no \
             -o StrictHostKeyChecking=yes \
             -p "$HOSTINGER_PORT" \
             "$HOSTINGER_USERNAME@$HOSTINGER_HOST" \
-            "rm -rf '$LIVE_PATH/deploy-temp' && mkdir -p '$LIVE_PATH/deploy-temp'"
+            "
+              set -e
+              rm -rf '$LIVE_PATH/deploy-temp'
+              mkdir -p '$LIVE_PATH/deploy-temp'
+            "
 
       - name: Upload React build
         shell: bash
         env:
           SSHPASS: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
+          set -e
+
           tar -C client/build -czf - . | sshpass -e ssh \
+            -o ConnectTimeout=20 \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=3 \
             -o PreferredAuthentications=password \
             -o PubkeyAuthentication=no \
             -o StrictHostKeyChecking=yes \
@@ -106,7 +145,12 @@ jobs:
         env:
           SSHPASS: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
+          set -e
+
           sshpass -e ssh \
+            -o ConnectTimeout=20 \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=3 \
             -o PreferredAuthentications=password \
             -o PubkeyAuthentication=no \
             -o StrictHostKeyChecking=yes \
@@ -122,6 +166,7 @@ jobs:
               test -f \"\$TEMP/index.html\"
               test -f \"\$TEMP/asset-manifest.json\"
               test -d \"\$TEMP/static\"
+              test -f \"\$TEMP/.htaccess\"
 
               rm -rf \"\$BACKUP\"
               mkdir -p \"\$BACKUP\"
@@ -134,6 +179,10 @@ jobs:
                 cp \"\$LIVE/asset-manifest.json\" \"\$BACKUP/\"
               fi
 
+              if [ -f \"\$LIVE/.htaccess\" ]; then
+                cp \"\$LIVE/.htaccess\" \"\$BACKUP/\"
+              fi
+
               if [ -d \"\$LIVE/static\" ]; then
                 cp -r \"\$LIVE/static\" \"\$BACKUP/\"
               fi
@@ -142,6 +191,7 @@ jobs:
 
               cp \"\$TEMP/index.html\" \"\$LIVE/index.html\"
               cp \"\$TEMP/asset-manifest.json\" \"\$LIVE/asset-manifest.json\"
+              cp \"\$TEMP/.htaccess\" \"\$LIVE/.htaccess\"
               cp -r \"\$TEMP/static\" \"\$LIVE/static\"
 
               rm -rf \"\$TEMP\"
@@ -152,13 +202,36 @@ jobs:
       - name: Verify deployed website
         shell: bash
         run: |
+          set -e
+
           curl \
             --fail \
             --silent \
             --show-error \
-            --retry 3 \
+            --retry 5 \
             --retry-delay 5 \
+            --retry-all-errors \
             https://ailyt.in/ \
             > /dev/null
 
-          echo "Website verification successful"
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            --retry 5 \
+            --retry-delay 5 \
+            --retry-all-errors \
+            https://ailyt.in/admin-intern-tool \
+            > /dev/null
+
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            --retry 5 \
+            --retry-delay 5 \
+            --retry-all-errors \
+            https://ailyt.in/verify-intern/4H7W2K85 \
+            > /dev/null
+
+          echo "Website and React routes verified successfully"
