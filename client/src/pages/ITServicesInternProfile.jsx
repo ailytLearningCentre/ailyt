@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import internsData from '../data/internsData';
-import './ITServicesInternProfile.css';
+import './ITServicesInterns.css';
 
 const ITServicesInternProfile = () => {
   const { slug } = useParams();
+  const [photoError, setPhotoError] = useState(false);
 
   const intern = internsData.find(
     (item) => item.slug === slug
   );
+
+  useEffect(() => {
+    setPhotoError(false);
+  }, [slug, intern?.photo]);
 
   if (!intern) {
     return (
@@ -40,7 +45,18 @@ const ITServicesInternProfile = () => {
 
         <div className="intern-profile-header">
           <div className="intern-profile-photo">
-            <span>{intern.name.charAt(0)}</span>
+            {!photoError && intern.photo ? (
+              <img
+                key={intern.photo}
+                src={intern.photo}
+                alt={`${intern.name} profile`}
+                onError={() => setPhotoError(true)}
+              />
+            ) : (
+              <span>
+                {intern.name.charAt(0).toUpperCase()}
+              </span>
+            )}
           </div>
 
           <div className="intern-profile-heading">

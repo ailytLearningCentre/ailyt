@@ -46,29 +46,49 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   border: 2px solid #e23edc;
   border-radius: 50%;
   background: linear-gradient(135deg, #d937db, #762485);
   font-size: 4rem;
   font-weight: 700;
+  box-shadow: 0 10px 30px rgba(226, 62, 220, 0.2);
 }
 
-.intern-profile-label {
-  margin-bottom: 8px;
+.intern-profile-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.intern-profile-photo span {
+  color: #ffffff;
+}
+
+.intern-profile-label,
+.verification-label {
+  margin: 0 0 8px;
   color: #ed70e9;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 2px;
 }
 
+.intern-profile-heading {
+  min-width: 0;
+}
+
 .intern-profile-heading h1 {
   margin: 0 0 10px;
   color: #ed43e4;
   font-size: clamp(2.2rem, 5vw, 3.8rem);
+  overflow-wrap: anywhere;
 }
 
 .intern-profile-role {
-  margin-bottom: 18px;
+  margin: 0 0 18px;
   color: #d0d0da;
   font-size: 1.2rem;
 }
@@ -81,7 +101,9 @@
   color: #b7b7c2;
 }
 
+.intern-verification-badge,
 .available-badge {
+  display: inline-block;
   padding: 7px 13px;
   border: 1px solid rgba(57, 218, 129, 0.5);
   border-radius: 999px;
@@ -131,13 +153,38 @@
 }
 
 .profile-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   margin: 0;
-  padding-left: 20px;
+  padding: 0;
   color: #c4c4ce;
 }
 
 .profile-projects li {
   margin-bottom: 10px;
+}
+
+.project-detail {
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(226, 62, 220, 0.18);
+}
+
+.project-detail:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.project-detail h3 {
+  margin: 0 0 8px;
+  color: #f181ed;
+  font-size: 1rem;
+}
+
+.project-detail p {
+  margin: 0;
+  color: #c9c9d3;
+  line-height: 1.75;
 }
 
 .intern-profile-links {
@@ -165,24 +212,6 @@
   color: #777786;
 }
 
-@media (max-width: 750px) {
-  .intern-profile-page {
-    padding: 105px 20px 60px;
-  }
-
-  .intern-profile-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .intern-profile-status {
-    justify-content: center;
-  }
-
-  .intern-profile-content {
-    grid-template-columns: 1fr;
-  }
-}
 .intern-details-table-wrapper {
   overflow: hidden;
   border: 1px solid rgba(226, 62, 220, 0.35);
@@ -219,16 +248,19 @@
 .intern-details-table td {
   color: #c9c9d3;
   line-height: 1.75;
+  overflow-wrap: anywhere;
 }
 
 .profile-table-link {
   display: inline-block;
+  max-width: 100%;
   padding: 9px 15px;
   border-radius: 8px;
   background: linear-gradient(90deg, #d937db, #ef41ae);
   color: #ffffff;
   font-weight: 700;
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 .profile-table-link:hover {
@@ -259,6 +291,73 @@
   color: #ff8989;
 }
 
+.certificate-valid {
+  display: inline-block;
+  padding: 7px 14px;
+  border: 1px solid rgba(57, 218, 129, 0.5);
+  border-radius: 999px;
+  background: rgba(57, 218, 129, 0.12);
+  color: #5be398;
+  font-weight: 700;
+}
+
+.intern-not-found {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 45px;
+  border: 1px solid rgba(226, 62, 220, 0.35);
+  border-radius: 20px;
+  background: rgba(24, 24, 37, 0.92);
+  text-align: center;
+}
+
+.intern-not-found h1 {
+  margin: 0 0 14px;
+  color: #ed43e4;
+}
+
+.intern-not-found p {
+  margin-bottom: 24px;
+  color: #c4c4ce;
+}
+
+.intern-not-found a {
+  display: inline-block;
+  padding: 11px 17px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #d937db, #ef41ae);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 750px) {
+  .intern-profile-page {
+    padding: 105px 20px 60px;
+  }
+
+  .intern-profile-header {
+    flex-direction: column;
+    gap: 22px;
+    padding: 28px 22px;
+    text-align: center;
+  }
+
+  .intern-profile-photo {
+    width: 145px;
+    height: 145px;
+    font-size: 3.4rem;
+  }
+
+  .intern-profile-status {
+    justify-content: center;
+  }
+
+  .intern-profile-content {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 700px) {
   .intern-details-table,
   .intern-details-table tbody,
@@ -278,13 +377,42 @@
   }
 
   .intern-details-table th {
-    padding-bottom: 10px;
+    padding: 18px 18px 8px;
     border-bottom: none;
   }
 
   .intern-details-table td {
-    padding-top: 5px;
+    padding: 5px 18px 18px;
     border-bottom: none;
   }
 }
 
+@media (max-width: 480px) {
+  .intern-profile-page {
+    padding: 95px 14px 45px;
+  }
+
+  .intern-profile-header {
+    padding: 24px 16px;
+  }
+
+  .intern-profile-photo {
+    width: 125px;
+    height: 125px;
+    font-size: 3rem;
+  }
+
+  .intern-profile-heading h1 {
+    font-size: 2.2rem;
+  }
+
+  .intern-profile-role {
+    font-size: 1rem;
+  }
+
+  .profile-table-link {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}

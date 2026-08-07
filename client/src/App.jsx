@@ -66,7 +66,8 @@ function Main() {
     location.pathname.startsWith('/admin-intern-tool');
 
   const isVerificationPage =
-    location.pathname.startsWith('/verify-intern');
+    location.pathname.startsWith('/verify-intern') ||
+    location.pathname.startsWith('/verify/');
 
   const hideNormalNavigation =
     isAdminTool || isVerificationPage;
@@ -87,23 +88,31 @@ function Main() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route path="/learning" element={<Learning />} />
+        <Route
+          path="/learning"
+          element={<Learning />}
+        />
+
         <Route
           path="/learning/courses"
           element={<LearningCourses />}
         />
+
         <Route
           path="/learning/internship-programs"
           element={<LearningInternshipPrograms />}
         />
+
         <Route
           path="/learning/about"
           element={<LearningAbout />}
         />
+
         <Route
           path="/learning/contact"
           element={<LearningContact />}
         />
+
         <Route
           path="/learning/enquiries"
           element={<LearningEnquiries />}
@@ -113,26 +122,32 @@ function Main() {
           path="/it-services"
           element={<ITServices />}
         />
+
         <Route
           path="/it-services/services"
           element={<ITServicesServices />}
         />
+
         <Route
           path="/it-services/industries"
           element={<ITServicesIndustries />}
         />
+
         <Route
           path="/it-services/projects"
           element={<ITServicesProjects />}
         />
+
         <Route
           path="/it-services/interns/:slug"
           element={<ITServicesInternProfile />}
         />
+
         <Route
           path="/it-services/hire-interns"
           element={<ITServicesHireInterns />}
         />
+
         <Route
           path="/it-services/contact"
           element={<ITServicesContact />}
@@ -140,6 +155,11 @@ function Main() {
 
         <Route
           path="/verify-intern/:verificationCode"
+          element={<VerifyIntern />}
+        />
+
+        <Route
+          path="/verify/:verificationCode"
           element={<VerifyIntern />}
         />
 
@@ -152,15 +172,37 @@ function Main() {
           path="/community"
           element={<Community />}
         />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/about" element={<About />} />
+
+        <Route
+          path="/courses"
+          element={<Courses />}
+        />
+
+        <Route
+          path="/services"
+          element={<Services />}
+        />
+
+        <Route
+          path="/about"
+          element={<About />}
+        />
+
         <Route
           path="/our-story"
           element={<OurStory />}
         />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/blog" element={<BlogPage />} />
+
+        <Route
+          path="/contact"
+          element={<Contact />}
+        />
+
+        <Route
+          path="/blog"
+          element={<BlogPage />}
+        />
+
         <Route
           path="/blog/details"
           element={<BlogDetails />}

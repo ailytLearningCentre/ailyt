@@ -429,7 +429,7 @@ export default internsData;
                 name="startDate"
                 value={formData.startDate}
                 onChange={handleChange}
-                placeholder="01 Feb 2026"
+                placeholder="01 Jan 2026"
               />
             </div>
 
@@ -440,7 +440,7 @@ export default internsData;
                 name="endDate"
                 value={formData.endDate}
                 onChange={handleChange}
-                placeholder="31 July 2026"
+                placeholder="30 June 2026"
               />
             </div>
 

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import internsData from '../data/internsData';
 import './VerifyIntern.css';
 
 const VerifyIntern = () => {
   const { verificationCode } = useParams();
+  const [photoError, setPhotoError] = useState(false);
 
   const intern = internsData.find(
     (item) =>
@@ -58,11 +59,20 @@ const VerifyIntern = () => {
         </p>
 
         <div className="verification-profile">
-          <div className="verification-avatar">
-            {intern.name.charAt(0)}
-          </div>
+          {!photoError && intern.photo ? (
+            <img
+              src={intern.photo}
+              alt={`${intern.name} profile`}
+              className="verification-avatar-image"
+              onError={() => setPhotoError(true)}
+            />
+          ) : (
+            <div className="verification-avatar">
+              {intern.name.charAt(0).toUpperCase()}
+            </div>
+          )}
 
-          <div>
+          <div className="verification-profile-content">
             <h2>{intern.name}</h2>
             <p>{intern.role}</p>
           </div>
