@@ -47,7 +47,13 @@ jobs:
           test -d client/build/static
           test -f client/build/.htaccess
 
-          echo "React build verified successfully"
+          # Verify intern images are included in the React build
+          test -d client/build/images
+          test -d client/build/images/interns
+          test -f client/build/images/interns/anushka.jpg
+          test -f client/build/images/interns/vidushi-arora.jpg
+
+          echo "React build and intern images verified successfully"
 
       - name: Install SSH password utility
         shell: bash
@@ -163,11 +169,18 @@ jobs:
               TEMP='$LIVE_PATH/deploy-temp'
               BACKUP='$LIVE_PATH/auto-backup'
 
+              # Verify temporary deployment
               test -f \"\$TEMP/index.html\"
               test -f \"\$TEMP/asset-manifest.json\"
               test -d \"\$TEMP/static\"
               test -f \"\$TEMP/.htaccess\"
 
+              # NEW: verify images exist
+              test -d \"\$TEMP/images\"
+              test -d \"\$TEMP/images/interns\"
+              test -f \"\$TEMP/images/interns/anushka.jpg\"
+
+              # Prepare backup
               rm -rf \"\$BACKUP\"
               mkdir -p \"\$BACKUP\"
 
@@ -187,16 +200,33 @@ jobs:
                 cp -r \"\$LIVE/static\" \"\$BACKUP/\"
               fi
 
-              rm -rf \"\$LIVE/static\"
+              # NEW: backup existing images
+              if [ -d \"\$LIVE/images\" ]; then
+                cp -r \"\$LIVE/images\" \"\$BACKUP/\"
+              fi
 
+              # Remove old frontend assets
+              rm -rf \"\$LIVE/static\"
+              rm -rf \"\$LIVE/images\"
+
+              # Publish new frontend
               cp \"\$TEMP/index.html\" \"\$LIVE/index.html\"
               cp \"\$TEMP/asset-manifest.json\" \"\$LIVE/asset-manifest.json\"
               cp \"\$TEMP/.htaccess\" \"\$LIVE/.htaccess\"
+
               cp -r \"\$TEMP/static\" \"\$LIVE/static\"
+
+              # NEW: publish images to public_html/images
+              cp -r \"\$TEMP/images\" \"\$LIVE/images\"
+
+              # Confirm images were deployed
+              test -f \"\$LIVE/images/interns/anushka.jpg\"
+              test -f \"\$LIVE/images/interns/vidushi-arora.jpg\"
 
               rm -rf \"\$TEMP\"
 
               echo 'Deployment completed successfully'
+              echo 'Intern images deployed successfully'
             "
 
       - name: Verify deployed website
@@ -234,4 +264,15 @@ jobs:
             https://ailyt.in/verify-intern/4H7W2K85 \
             > /dev/null
 
-          echo "Website and React routes verified successfully"
+          # NEW: verify intern image is publicly accessible
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            --retry 5 \
+            --retry-delay 5 \
+            --retry-all-errors \
+            https://ailyt.in/images/interns/anushka.jpg \
+            > /dev/null
+
+          echo "Website, React routes and intern images verified successfully"
