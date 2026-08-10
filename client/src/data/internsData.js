@@ -242,7 +242,7 @@ const internsData = [
     ],
 
     about:
-      'A BCA graduate with a strong interest in mobile application and backend development. Passionate about learning new technologies, solving real-world problems, and building reliable applications. A quick learner with good communication and teamwork skills.',
+      'A Bsc.It graduate with a strong interest in mobile application and backend development. Passionate about learning new technologies, solving real-world problems, and building reliable applications. A quick learner with good communication and teamwork skills.',
 
     projects: [
       {
@@ -279,7 +279,7 @@ const internsData = [
     ],
 
     about:
-      'A BCA graduate with a strong interest in mobile application and backend development. Passionate about learning new technologies, solving real-world problems, and building reliable applications.',
+      'A Bsc.It graduate with a strong interest in mobile application and backend development. Passionate about learning new technologies, solving real-world problems, and building reliable applications.',
 
     projects: [
       {
