@@ -16,11 +16,17 @@ import Home from './pages/Home';
 import Learning from './pages/Learning';
 import LearningCourses from './pages/LearningCourses';
 import LearningInternshipPrograms from './pages/LearningInternshipPrograms';
+import LearningInterns from './pages/LearningInterns';
+import LearningTrainers from './pages/LearningTrainers';
+import LearningTestimonials from './pages/LearningTestimonials';
 import LearningAbout from './pages/LearningAbout';
 import LearningContact from './pages/LearningContact';
 import LearningEnquiries from './pages/LearningEnquiries';
 
 import ITServices from './pages/ITServices';
+import WebDevelopmentServices from './pages/WebDevelopmentServices';
+import MobileAppDevelopmentServices from './pages/MobileAppDevelopmentServices';
+import AutomationIntegrationsServices from './pages/AutomationIntegrationsServices';
 import ITServicesServices from './pages/ITServicesServices';
 import ITServicesIndustries from './pages/ITServicesIndustries';
 import ITServicesProjects from './pages/ITServicesProjects';
@@ -39,6 +45,8 @@ import Contact from './pages/Contact';
 import OurStory from './pages/OurStory';
 import BlogPage from './pages/BlogPage';
 import BlogDetails from './pages/BlogDetails';
+import DataAnalystLanding from './pages/DataAnalystLanding';
+import IgnouBcaMcaLanding from './pages/IgnouBcaMcaLanding';
 
 import './styles/index.css';
 
@@ -54,7 +62,8 @@ function Main() {
   const location = useLocation();
 
   const isLearning =
-    location.pathname.startsWith('/learning');
+    location.pathname.startsWith('/learning') ||
+    location.pathname === '/data-analyst-course-dehradun';
 
   const isITServices =
     location.pathname.startsWith('/it-services');
@@ -89,6 +98,16 @@ function Main() {
         <Route path="/" element={<Home />} />
 
         <Route
+          path="/data-analyst-course-dehradun"
+          element={<DataAnalystLanding />}
+        />
+
+        <Route
+          path="/learning/courses/ignou-bca-mca"
+          element={<IgnouBcaMcaLanding />}
+        />
+
+        <Route
           path="/learning"
           element={<Learning />}
         />
@@ -104,12 +123,25 @@ function Main() {
         />
 
         <Route
+          path="/learning/interns"
+          element={<LearningInterns />}
+        />
+
+        <Route
           path="/learning/about"
           element={<LearningAbout />}
         />
 
         <Route
-          path="/learning/contact"
+          path="/learning/trainers"
+          element={<LearningTrainers />}
+        />
+
+        <Route          path="/learning/testimonials"
+          element={<LearningTestimonials />}
+        />
+
+        <Route          path="/learning/contact"
           element={<LearningContact />}
         />
 
@@ -121,6 +153,21 @@ function Main() {
         <Route
           path="/it-services"
           element={<ITServices />}
+        />
+
+        <Route
+          path="/it-services/web-development"
+          element={<WebDevelopmentServices />}
+        />
+
+        <Route
+          path="/it-services/mobile-app-development"
+          element={<MobileAppDevelopmentServices />}
+        />
+
+        <Route
+          path="/it-services/automation-integrations"
+          element={<AutomationIntegrationsServices />}
         />
 
         <Route

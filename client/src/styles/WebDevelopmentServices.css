@@ -1,0 +1,62 @@
+.web-development-page { width: 100%; overflow: hidden; background: #0f0f0f; color: #fff; }
+.web-development-container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+.web-development-section { padding: 88px 0; }
+.web-development-kicker { display: inline-block; margin-bottom: 12px; color: #f0abfc; font-size: .82rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.web-development-heading { max-width: 840px; margin: 0 auto 44px; text-align: center; }
+.web-development-heading h2, .web-development-two-column h2, .web-development-detail-grid h2, .web-development-final h2 { margin: 0 0 18px; color: #fff; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.2; }
+.web-development-page p { color: #b8b8c7; line-height: 1.8; }
+.web-development-page strong { color: #fff; }
+.web-development-page a { color: #f0abfc; font-weight: 700; }
+.web-development-hero { padding: 92px 0; background: radial-gradient(circle at 80% 20%, rgba(217,70,239,.16), transparent 30%), linear-gradient(135deg, #0f0f0f, #1a1a2e); border-bottom: 1px solid rgba(217,70,239,.28); }
+.web-development-hero-grid, .web-development-two-column { display: grid; grid-template-columns: 1.1fr .9fr; gap: 58px; align-items: center; }
+.web-development-hero-copy h1 { max-width: 780px; margin: 0 0 22px; font-size: clamp(2.55rem, 5vw, 4.4rem); line-height: 1.04; letter-spacing: -.04em; background: linear-gradient(135deg, #fff 10%, #f0abfc 60%, #ec4899); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.web-development-hero-copy p { max-width: 760px; color: #c7c7d2; font-size: 1.08rem; }
+.web-development-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+.web-development-primary, .web-development-secondary { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; padding: 13px 24px; border-radius: 8px; text-decoration: none; transition: transform .25s ease; }
+.web-development-primary { background: linear-gradient(135deg, #d946ef, #ec4899); color: #fff !important; box-shadow: 0 10px 28px rgba(217,70,239,.2); }
+.web-development-secondary { border: 1px solid rgba(240,171,252,.55); background: rgba(255,255,255,.03); color: #fff !important; }
+.web-development-primary:hover, .web-development-secondary:hover { transform: translateY(-2px); }
+.web-development-hero-panel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.web-development-hero-panel > div { min-height: 142px; padding: 24px; border: 1px solid rgba(217,70,239,.28); border-radius: 15px; background: rgba(26,26,46,.72); }
+.web-development-hero-panel strong { display: block; margin-bottom: 10px; font-size: 1.2rem; }
+.web-development-hero-panel span { color: #b8b8c7; line-height: 1.6; }
+.web-development-alt, .web-development-projects { background: linear-gradient(135deg, #171723, #1a1a2e); }
+.web-development-card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.web-development-card, .web-development-audience-grid article, .web-development-faq-grid article { padding: 26px; border: 1px solid rgba(217,70,239,.24); border-radius: 13px; background: rgba(26,26,46,.56); transition: transform .25s ease, border-color .25s ease; }
+.web-development-card:hover, .web-development-audience-grid article:hover, .web-development-faq-grid article:hover { transform: translateY(-5px); border-color: #d946ef; }
+.web-development-card > span, .web-development-process-grid span { display: inline-block; margin-bottom: 14px; color: #f0abfc; font-size: .84rem; font-weight: 700; }
+.web-development-card h3, .web-development-audience-grid h3, .web-development-faq-grid h3, .web-development-process-grid h3 { margin: 0 0 12px; color: #fff; font-size: 1.18rem; line-height: 1.35; }
+.web-development-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 54px; align-items: start; }
+.web-development-process { background: radial-gradient(circle at 15% 15%, rgba(236,72,153,.08), transparent 28%), #0f0f0f; }
+.web-development-process-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.web-development-process-grid article { padding: 24px; border-top: 3px solid #d946ef; border-radius: 11px; background: #171723; }
+.web-development-tech-list, .web-development-pill-grid, .web-development-approach-grid { display: flex; flex-wrap: wrap; gap: 12px; align-content: center; }
+.web-development-tech-list span, .web-development-pill-grid span, .web-development-approach-grid span { padding: 12px 15px; border: 1px solid rgba(217,70,239,.28); border-radius: 8px; background: rgba(15,15,15,.5); color: #f0abfc; font-weight: 600; }
+.web-development-audience-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.web-development-company-note { max-width: 850px; margin: 30px auto 0; text-align: center; }
+.web-development-approach { background: radial-gradient(circle at 80% 30%, rgba(217,70,239,.12), transparent 32%), #0f0f0f; }
+.web-development-approach-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.web-development-approach-grid span { text-align: center; }
+.web-development-inline-links { display: flex; flex-wrap: wrap; gap: 18px 26px; margin-top: 22px; }
+.web-development-faq { background: linear-gradient(135deg, #0f0f0f, #1a1a2e); }
+.web-development-faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.webdev-learning-bridge { padding: 72px 0; background: radial-gradient(circle at 15% 30%, rgba(217,70,239,.14), transparent 34%), linear-gradient(135deg, #1a1a2e, #171723); border-top: 1px solid rgba(217,70,239,.35); border-bottom: 1px solid rgba(217,70,239,.35); }
+.webdev-learning-bridge-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 48px; align-items: center; }
+.webdev-learning-bridge h2 { margin: 0 0 18px; color: #fff; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.2; }
+.webdev-learning-bridge p { max-width: 650px; color: #c7c7d2; line-height: 1.8; }
+.webdev-learning-bridge-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.webdev-learning-bridge-card { display: flex; min-height: 150px; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid rgba(217,70,239,.32); border-radius: 12px; background: rgba(15,15,15,.48); text-decoration: none; transition: transform .25s ease, border-color .25s ease; }
+.webdev-learning-bridge-card:hover { transform: translateY(-4px); border-color: #d946ef; }
+.webdev-learning-bridge-card strong { color: #fff; font-size: 1.08rem; line-height: 1.4; }
+.webdev-learning-bridge-card span { margin-top: 16px; color: #b8b8c7; font-size: .92rem; line-height: 1.6; }
+.webdev-learning-bridge-link { grid-column: 1 / -1; justify-self: start; color: #f0abfc; font-weight: 700; text-decoration: none; }
+.webdev-learning-bridge-link:hover { color: #fff; }
+.web-development-final { padding: 82px 0; text-align: center; background: linear-gradient(135deg, #d946ef, #ec4899); }
+.web-development-final p { max-width: 720px; margin: 0 auto; color: rgba(255,255,255,.94); }
+.web-development-final .web-development-actions { justify-content: center; }
+.web-development-final .web-development-primary { background: #fff; color: #c026d3 !important; }
+.web-development-final .web-development-secondary { border-color: rgba(255,255,255,.85); }
+
+@media (max-width: 1100px) { .web-development-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .web-development-audience-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1000px) { .web-development-hero-grid, .web-development-two-column, .webdev-learning-bridge-grid { grid-template-columns: 1fr; } .web-development-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) { .web-development-section, .web-development-hero, .web-development-final, .webdev-learning-bridge { padding: 58px 0; } .web-development-container { width: min(100% - 28px, 1180px); } .web-development-hero-panel, .web-development-card-grid, .web-development-detail-grid, .web-development-process-grid, .web-development-audience-grid, .web-development-faq-grid, .webdev-learning-bridge-options { grid-template-columns: 1fr; } .web-development-approach-grid { grid-template-columns: 1fr; } .web-development-actions { flex-direction: column; } .web-development-primary, .web-development-secondary { width: 100%; } .web-development-hero-copy h1 { font-size: clamp(2.25rem, 11vw, 3.5rem); } .web-development-inline-links { flex-direction: column; gap: 12px; } .webdev-learning-bridge-link { grid-column: auto; justify-self: start; } }

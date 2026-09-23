@@ -1,0 +1,370 @@
+/* =========================================================
+   AILYT LEARNING ABOUT PAGE
+   File: src/styles/LearningAbout.css
+   ========================================================= */
+
+.learning-about-page {
+  width: 100%;
+  overflow: hidden;
+  background: #0f0f0f;
+  color: #ffffff;
+}
+
+.about-learning-container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.about-learning-section {
+  padding: 88px 0;
+}
+
+.about-learning-kicker {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #f0abfc;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.about-learning-section-heading {
+  max-width: 840px;
+  margin: 0 auto 46px;
+  text-align: center;
+}
+
+.about-learning-section-heading h2,
+.about-learning-two-column h2,
+.about-learning-final-cta h2 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.2;
+}
+
+.about-learning-section-heading p,
+.about-learning-two-column p,
+.about-learning-highlight-box p {
+  color: #b8b8c7;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.about-learning-two-column p + p {
+  margin-top: 14px;
+}
+
+.about-learning-hero {
+  padding: 92px 0;
+  background:
+    radial-gradient(circle at 78% 22%, rgba(217, 70, 239, 0.16), transparent 30%),
+    linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+  border-bottom: 1px solid rgba(217, 70, 239, 0.28);
+}
+
+.about-learning-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 58px;
+  align-items: center;
+}
+
+.about-learning-hero-copy h1 {
+  margin: 0 0 22px;
+  max-width: 760px;
+  font-size: clamp(2.55rem, 5vw, 4.3rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #ffffff 10%, #f0abfc 58%, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.about-learning-hero-copy p {
+  max-width: 760px;
+  color: #c7c7d2;
+  font-size: 1.06rem;
+  line-height: 1.8;
+}
+
+.about-learning-hero-copy p + p {
+  margin-top: 14px;
+}
+
+.about-learning-actions,
+.about-learning-final-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.about-learning-primary-btn,
+.about-learning-secondary-btn {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-learning-primary-btn {
+  background: linear-gradient(135deg, #d946ef, #ec4899);
+  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(217, 70, 239, 0.2);
+}
+
+.about-learning-secondary-btn {
+  border: 1px solid rgba(240, 171, 252, 0.55);
+  background: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+}
+
+.about-learning-primary-btn:hover,
+.about-learning-secondary-btn:hover {
+  transform: translateY(-2px);
+}
+
+.about-learning-hero-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.about-learning-hero-panel > div {
+  min-height: 142px;
+  padding: 24px;
+  border: 1px solid rgba(217, 70, 239, 0.28);
+  border-radius: 16px;
+  background: rgba(26, 26, 46, 0.72);
+}
+
+.about-learning-hero-panel strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+.about-learning-hero-panel span {
+  color: #b8b8c7;
+  line-height: 1.6;
+}
+
+.about-learning-methodology,
+.about-learning-infrastructure {
+  background: linear-gradient(135deg, #0f0f0f 0%, #151525 100%);
+}
+
+.about-learning-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.about-learning-card {
+  min-height: 255px;
+  padding: 28px;
+  border: 1px solid rgba(217, 70, 239, 0.24);
+  border-radius: 14px;
+  background: rgba(26, 26, 46, 0.56);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.about-learning-card:hover {
+  transform: translateY(-6px);
+  border-color: #d946ef;
+}
+
+.about-learning-card-number {
+  display: inline-flex;
+  width: 46px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d946ef, #ec4899);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.about-learning-card h3,
+.about-learning-journey-card h3,
+.about-learning-faq-card h3,
+.about-learning-highlight-box h3 {
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-size: 1.24rem;
+}
+
+.about-learning-card p,
+.about-learning-journey-card p,
+.about-learning-faq-card p {
+  color: #b8b8c7;
+  line-height: 1.72;
+}
+
+.about-learning-journey {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(236, 72, 153, 0.08), transparent 28%),
+    #0f0f0f;
+}
+
+.about-learning-journey-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.about-learning-journey-card {
+  padding: 24px;
+  border-top: 3px solid #d946ef;
+  border-radius: 12px;
+  background: #171723;
+}
+
+.about-learning-journey-card > span {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #f0abfc;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.about-learning-local,
+.about-learning-hybrid {
+  background: linear-gradient(135deg, #171723 0%, #1a1a2e 100%);
+}
+
+.about-learning-two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.about-learning-highlight-box {
+  padding: 30px;
+  border: 1px solid rgba(217, 70, 239, 0.28);
+  border-radius: 16px;
+  background: rgba(15, 15, 15, 0.5);
+}
+
+.about-learning-highlight-box ul {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.about-learning-highlight-box li {
+  position: relative;
+  padding-left: 24px;
+  color: #d6d6df;
+  line-height: 1.6;
+}
+
+.about-learning-highlight-box li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #f0abfc;
+  font-weight: 700;
+}
+
+.about-learning-faq {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+}
+
+.about-learning-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.about-learning-faq-card {
+  padding: 26px;
+  border: 1px solid rgba(217, 70, 239, 0.22);
+  border-radius: 12px;
+  background: rgba(26, 26, 46, 0.6);
+}
+
+.about-learning-final-cta {
+  padding: 82px 0;
+  text-align: center;
+  background: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
+}
+
+.about-learning-final-cta p {
+  max-width: 720px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.94);
+  line-height: 1.75;
+}
+
+.about-learning-final-actions {
+  justify-content: center;
+}
+
+.about-learning-final-cta .about-learning-primary-btn {
+  background: #ffffff;
+  color: #c026d3;
+}
+
+.about-learning-final-cta .about-learning-secondary-btn {
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 1000px) {
+  .about-learning-hero-grid,
+  .about-learning-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .about-learning-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-learning-journey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .about-learning-section,
+  .about-learning-hero,
+  .about-learning-final-cta {
+    padding: 58px 0;
+  }
+
+  .about-learning-container {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .about-learning-hero-panel,
+  .about-learning-card-grid,
+  .about-learning-journey-grid,
+  .about-learning-faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-learning-actions,
+  .about-learning-final-actions {
+    flex-direction: column;
+  }
+
+  .about-learning-primary-btn,
+  .about-learning-secondary-btn {
+    width: 100%;
+  }
+}

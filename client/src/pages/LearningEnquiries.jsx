@@ -2,18 +2,21 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Learning.css';
+import '../styles/LearningEnquiries.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL ||
+  (process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api' : '');
 
 const getFetchErrorMessage = (error, fallbackMessage) => {
   const message = String(error?.message || '').toLowerCase();
   const isNetworkError = error?.name === 'TypeError' || message.includes('failed to fetch');
 
   if (isNetworkError) {
-    return `Cannot reach backend API at ${API_BASE_URL}. Please start server and verify CORS/API URL.`;
+    return fallbackMessage || 'Unable to load enquiries right now. Please try again later.';
   }
 
-  return error?.message || fallbackMessage || 'Unable to fetch enquiries.';
+  return fallbackMessage || 'Unable to load enquiries right now. Please try again later.';
 };
 
 const courseLabels = {
@@ -27,6 +30,12 @@ const courseLabels = {
   python: 'Python',
   'data-analytics': 'Data Analytics',
   tableau: 'Tableau',
+  'ignou-bca-mca-support': 'IGNOU BCA / MCA Support',
+  'software-development-internship': 'Software Development Internship',
+  'ignou-bca-counselling': 'IGNOU BCA Counselling',
+  'ignou-mca-counselling': 'IGNOU MCA Counselling',
+  'ignou-bca-program-guide': 'IGNOU BCA Program Guide',
+  'ignou-mca-program-guide': 'IGNOU MCA Program Guide',
 };
 
 const modeLabels = {
@@ -52,6 +61,16 @@ const statusOptions = [
 
 const workflowStatusOptions = statusOptions.filter((option) => option.value);
 
+const courseFilterOptions = [
+  { value: '', label: 'All courses' },
+  ...Object.entries(courseLabels).map(([value, label]) => ({ value, label })),
+];
+
+const modeFilterOptions = [
+  { value: '', label: 'All learning modes' },
+  ...Object.entries(modeLabels).map(([value, label]) => ({ value, label })),
+];
+
 const formatDateTime = (value) => {
   if (!value) {
     return '-';
@@ -69,6 +88,9 @@ const formatDateTime = (value) => {
 const LearningEnquiries = () => {
   const [enquiries, setEnquiries] = useState([]);
   const [statusFilter, setStatusFilter] = useState('');
+  const [courseFilter, setCourseFilter] = useState('');
+  const [modeFilter, setModeFilter] = useState('');
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [statusUpdateError, setStatusUpdateError] = useState('');
@@ -79,14 +101,59 @@ const LearningEnquiries = () => {
     total: 0,
     totalPages: 1,
   });
+  const [summary, setSummary] = useState({ total: 0, new: 0, contacted: 0, enrolled: 0, closed: 0 });
+
+  useEffect(() => {
+    const previousTitle = document.title;
+    const robotsTags = [
+      ['robots', 'noindex, nofollow'],
+      ['googlebot', 'noindex, nofollow'],
+    ].map(([name, content]) => {
+      let tag = document.querySelector(`meta[name="${name}"]`);
+      const created = !tag;
+      const previousContent = tag?.getAttribute('content') || '';
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+      return { tag, created, previousContent };
+    });
+
+    document.title = 'Student Enquiry Dashboard | AILYT Learning Centre';
+    let description = document.querySelector('meta[name="description"]');
+    const createdDescription = !description;
+    const previousDescription = description?.getAttribute('content') || '';
+    if (!description) {
+      description = document.createElement('meta');
+      description.setAttribute('name', 'description');
+      document.head.appendChild(description);
+    }
+    description.setAttribute('content', 'Internal AILYT Learning Centre dashboard for reviewing student course enquiries, tracking enquiry status, and managing follow-up actions.');
+
+    return () => {
+      document.title = previousTitle;
+      robotsTags.forEach(({ tag, created, previousContent }) => {
+        if (created) tag.remove();
+        else tag.setAttribute('content', previousContent);
+      });
+      if (createdDescription) description.remove();
+      else description.setAttribute('content', previousDescription);
+    };
+  }, []);
 
   const fetchEnquiries = useCallback(
-    async (page = 1, status = '') => {
+    async (page = 1, status = '', course = '', mode = '', searchTerm = '') => {
       setLoading(true);
       setError('');
       setStatusUpdateError('');
 
       try {
+        if (!API_BASE_URL) {
+          throw new Error('The enquiry service is not configured.');
+        }
+
         const params = new URLSearchParams({
           page: String(page),
           limit: String(pagination.limit),
@@ -95,6 +162,9 @@ const LearningEnquiries = () => {
         if (status) {
           params.set('status', status);
         }
+        if (course) params.set('courseInterest', course);
+        if (mode) params.set('learningMode', mode);
+        if (searchTerm.trim()) params.set('search', searchTerm.trim());
 
         const response = await fetch(`${API_BASE_URL}/enquiries?${params.toString()}`);
         let result = {};
@@ -113,8 +183,9 @@ const LearningEnquiries = () => {
           ...previous,
           ...(result.pagination || {}),
         }));
+        setSummary(result.summary || { total: 0, new: 0, contacted: 0, enrolled: 0, closed: 0 });
       } catch (fetchError) {
-        setError(getFetchErrorMessage(fetchError, 'Unable to fetch enquiries.'));
+        setError(getFetchErrorMessage(fetchError, 'Unable to load enquiries right now. Please try again.'));
       } finally {
         setLoading(false);
       }
@@ -123,8 +194,11 @@ const LearningEnquiries = () => {
   );
 
   useEffect(() => {
-    fetchEnquiries(1, statusFilter);
-  }, [fetchEnquiries, statusFilter]);
+    const timer = setTimeout(() => {
+      fetchEnquiries(1, statusFilter, courseFilter, modeFilter, search);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [fetchEnquiries, statusFilter, courseFilter, modeFilter, search]);
 
   const currentPageStats = useMemo(() => {
     return enquiries.reduce(
@@ -138,7 +212,7 @@ const LearningEnquiries = () => {
   }, [enquiries]);
 
   const handleRefresh = () => {
-    fetchEnquiries(pagination.page, statusFilter);
+    fetchEnquiries(pagination.page, statusFilter, courseFilter, modeFilter, search);
   };
 
   const handleStatusChange = async (enquiryId, nextStatus) => {
@@ -146,6 +220,10 @@ const LearningEnquiries = () => {
     setUpdatingEnquiryId(enquiryId);
 
     try {
+      if (!API_BASE_URL) {
+        throw new Error('The enquiry service is not configured.');
+      }
+
       const response = await fetch(`${API_BASE_URL}/enquiries/${enquiryId}/status`, {
         method: 'PATCH',
         headers: {
@@ -165,13 +243,22 @@ const LearningEnquiries = () => {
         throw new Error(result.message || 'Unable to update enquiry status.');
       }
 
+      const previousStatus = enquiries.find((item) => item._id === enquiryId)?.status;
+
       setEnquiries((previous) =>
         previous.map((enquiry) =>
           enquiry._id === enquiryId ? { ...enquiry, status: nextStatus } : enquiry
         )
       );
+      setSummary((previous) => ({
+        ...previous,
+        [nextStatus]: previous[nextStatus] + 1,
+        ...(previousStatus
+          ? { [previousStatus]: Math.max(0, previous[previousStatus] - 1) }
+          : {}),
+      }));
     } catch (updateError) {
-      setStatusUpdateError(getFetchErrorMessage(updateError, 'Unable to update enquiry status.'));
+      setStatusUpdateError('We could not update the enquiry status. Please try again.');
     } finally {
       setUpdatingEnquiryId('');
     }
@@ -179,13 +266,13 @@ const LearningEnquiries = () => {
 
   const handlePrev = () => {
     if (pagination.page > 1) {
-      fetchEnquiries(pagination.page - 1, statusFilter);
+      fetchEnquiries(pagination.page - 1, statusFilter, courseFilter, modeFilter, search);
     }
   };
 
   const handleNext = () => {
     if (pagination.page < pagination.totalPages) {
-      fetchEnquiries(pagination.page + 1, statusFilter);
+      fetchEnquiries(pagination.page + 1, statusFilter, courseFilter, modeFilter, search);
     }
   };
 
@@ -197,35 +284,32 @@ const LearningEnquiries = () => {
             <div className="learning-contact-hero-text">
               <span className="contact-kicker">Company View</span>
               <h1>Student Enquiry Dashboard</h1>
-              <p>
-                Track and review all submitted student enrollment enquiries from the Learning
-                contact form.
-              </p>
+              <p>Review incoming course enquiries, track follow-up progress and manage student communication from one place.</p>
               <div className="contact-live-tags">
                 <span>Total: {pagination.total}</span>
-                <span>Current page: {currentPageStats.total}</span>
-                <span>New (page): {currentPageStats.new}</span>
+                <span>Showing: {currentPageStats.total}</span>
+                <span>Searchable contact records</span>
               </div>
             </div>
 
             <aside className="learning-contact-hero-card">
-              <h3>Current Page Snapshot</h3>
+              <h3>Enquiry Summary</h3>
               <ul className="contact-next-steps">
                 <li>
                   <span>N</span>
-                  New: {currentPageStats.new}
+                  New: {summary.new}
                 </li>
                 <li>
                   <span>C</span>
-                  Contacted: {currentPageStats.contacted}
+                  Contacted: {summary.contacted}
                 </li>
                 <li>
                   <span>E</span>
-                  Enrolled: {currentPageStats.enrolled}
+                  Enrolled: {summary.enrolled}
                 </li>
                 <li>
                   <span>X</span>
-                  Closed: {currentPageStats.closed}
+                  Closed: {summary.closed}
                 </li>
               </ul>
               <Link to="/learning/contact" className="course-link">
@@ -238,8 +322,23 @@ const LearningEnquiries = () => {
 
       <section className="learning-enquiries-section">
         <div className="section-container">
+          <div className="learning-enquiries-summary" aria-label="Enquiry summary">
+            {[
+              ['Total Enquiries', summary.total],
+              ['New', summary.new],
+              ['Contacted', summary.contacted],
+              ['Enrolled', summary.enrolled],
+              ['Closed', summary.closed],
+            ].map(([label, value]) => (
+              <div className="learning-enquiries-summary-card" key={label}>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+
           <div className="learning-enquiries-toolbar">
-            <div className="learning-enquiries-filter">
+            <div className="learning-enquiries-filter learning-enquiries-filter-group">
               <label htmlFor="statusFilter">Filter by status</label>
               <select
                 id="statusFilter"
@@ -252,12 +351,23 @@ const LearningEnquiries = () => {
                   </option>
                 ))}
               </select>
+              <label htmlFor="courseFilter">Course interest</label>
+              <select id="courseFilter" value={courseFilter} onChange={(event) => setCourseFilter(event.target.value)}>
+                {courseFilterOptions.map((option) => <option key={option.value || 'all-courses'} value={option.value}>{option.label}</option>)}
+              </select>
+              <label htmlFor="modeFilter">Learning mode</label>
+              <select id="modeFilter" value={modeFilter} onChange={(event) => setModeFilter(event.target.value)}>
+                {modeFilterOptions.map((option) => <option key={option.value || 'all-modes'} value={option.value}>{option.label}</option>)}
+              </select>
+              <label htmlFor="enquirySearch">Search contact</label>
+              <input id="enquirySearch" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Name, phone or email" />
             </div>
 
             <button
               type="button"
               className="cta-secondary learning-enquiries-refresh"
               onClick={handleRefresh}
+              disabled={loading}
             >
               Refresh List
             </button>
@@ -305,10 +415,10 @@ const LearningEnquiries = () => {
 
                   <div className="learning-enquiry-grid">
                     <p>
-                      <strong>Phone:</strong> {enquiry.phone}
+                      <strong>Phone:</strong> <a href={`tel:${enquiry.phone}`}>{enquiry.phone}</a>
                     </p>
                     <p>
-                      <strong>Email:</strong> {enquiry.email}
+                      <strong>Email:</strong> <a href={`mailto:${enquiry.email}`}>{enquiry.email}</a>
                     </p>
                     <p>
                       <strong>Course:</strong>{' '}
@@ -324,6 +434,12 @@ const LearningEnquiries = () => {
                     <p>
                       <strong>Qualification:</strong> {enquiry.qualification}
                     </p>
+                  </div>
+
+                  <div className="learning-enquiry-follow-up">
+                    <a href={`tel:${enquiry.phone}`}>Call</a>
+                    <a href={`mailto:${enquiry.email}`}>Email</a>
+                    <a href={`https://wa.me/${String(enquiry.phone).replace(/\D/g, '').replace(/^0/, '91')}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
                   </div>
 
                   <div className="learning-enquiry-message">

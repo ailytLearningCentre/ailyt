@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Learning.css';
+import '../styles/LearningContactSEO.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL ||
+  (process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api' : '');
 
 const getFetchErrorMessage = (error, fallbackMessage) => {
   const message = String(error?.message || '').toLowerCase();
   const isNetworkError = error?.name === 'TypeError' || message.includes('failed to fetch');
 
   if (isNetworkError) {
-    return `Cannot reach backend API at ${API_BASE_URL}. Please start server and verify CORS/API URL.`;
+    return 'We could not submit your enquiry right now. Please try again or contact us on WhatsApp.';
   }
 
-  return error?.message || fallbackMessage || 'Unable to submit your enquiry right now.';
+  return fallbackMessage || 'We could not submit your enquiry right now. Please try again or contact us on WhatsApp.';
 };
 
 const initialFormData = {
@@ -54,6 +57,50 @@ const LearningContact = () => {
   const [submitError, setSubmitError] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState('');
 
+  useEffect(() => {
+    const previousTitle = document.title;
+    let description = document.querySelector('meta[name="description"]');
+    const createdDescription = !description;
+    const previousDescription = description?.getAttribute('content') || '';
+
+    if (!description) {
+      description = document.createElement('meta');
+      description.setAttribute('name', 'description');
+      document.head.appendChild(description);
+    }
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    const createdCanonical = !canonical;
+    const previousCanonical = canonical?.getAttribute('href') || '';
+
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+
+    document.title = 'Contact AILYT Learning Centre in Dehradun | Course Enquiry';
+    description.setAttribute(
+      'content',
+      'Contact AILYT Learning Centre in Dehradun for course counselling, batch timings, fees and enrollment guidance for Data Analytics, BCA/MCA support, computer courses and IT training programs.'
+    );
+    canonical.setAttribute('href', 'https://ailyt.in/learning/contact');
+
+    return () => {
+      document.title = previousTitle;
+      if (createdDescription) {
+        description.remove();
+      } else {
+        description.setAttribute('content', previousDescription);
+      }
+      if (createdCanonical) {
+        canonical.remove();
+      } else {
+        canonical.setAttribute('href', previousCanonical);
+      }
+    };
+  }, []);
+
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
@@ -73,6 +120,10 @@ const LearningContact = () => {
     setSubmitSuccess('');
 
     try {
+      if (!API_BASE_URL) {
+        throw new Error('The enquiry service is not configured.');
+      }
+
       const response = await fetch(`${API_BASE_URL}/enquiries`, {
         method: 'POST',
         headers: {
@@ -109,20 +160,19 @@ const LearningContact = () => {
 
   return (
     <div className="learning-contact-page">
-      <section className="learning-contact-hero">
+      <section className="learning-contact-hero learning-contact-seo-hero">
         <div className="section-container">
           <div className="learning-contact-hero-content">
             <div className="learning-contact-hero-text">
-              <span className="contact-kicker">Student Enquiry Desk</span>
-              <h1>Connect With Us and Enroll With Confidence</h1>
+              <span className="contact-kicker">AILYT LEARNING CENTRE · DEHRADUN</span>
+              <h1>Contact AILYT Learning Centre in Dehradun</h1>
               <p>
-                Fill this enquiry form and our team will guide you to the best-fit course,
-                batch timing, and learning path for your career goals.
+                Connect with us and enroll with confidence. Ask about course selection, current batch timings, learning mode, fees, practical training, Data Analytics, BCA/MCA support, computer courses or internships.
               </p>
               <div className="contact-live-tags">
-                <span>Response within 24 hours</span>
-                <span>Course + internship guidance</span>
-                <span>Beginner to advanced tracks</span>
+                <span>Course guidance</span>
+                <span>Batch and fee guidance</span>
+                <span>Classroom or hybrid support</span>
               </div>
             </div>
 
@@ -136,8 +186,8 @@ const LearningContact = () => {
                   </li>
                 ))}
               </ul>
-              <Link to="/learning/courses" className="course-link">
-                Explore Courses
+              <Link to="/learning" className="course-link">
+                Explore Learning Programs
               </Link>
             </aside>
           </div>
@@ -148,9 +198,9 @@ const LearningContact = () => {
         <div className="section-container">
           <div className="learning-contact-grid">
             <aside className="learning-contact-sidepanel">
-              <h2>Why Students Reach Out</h2>
+                <h2>Course Guidance for Your Next Step</h2>
               <p>
-                From course confusion to career planning, we help you make a clear enrollment decision.
+                AILYT Learning Centre in Dehradun helps students, graduates and working learners compare learning programs, understand course expectations and make a clear enrollment decision.
               </p>
 
               <div className="learning-contact-reason-list">
@@ -229,6 +279,8 @@ const LearningContact = () => {
                     <option value="python">Python</option>
                     <option value="data-analytics">Data Analytics</option>
                     <option value="tableau">Tableau</option>
+                    <option value="ignou-bca-mca-support">IGNOU BCA / MCA Support</option>
+                    <option value="software-development-internship">Software Development Internship</option>
                   </select>
                 </div>
 
@@ -319,6 +371,48 @@ const LearningContact = () => {
 
               {submitError && <p className="learning-enroll-error">{submitError}</p>}
             </form>
+          </div>
+        </div>
+      </section>
+
+      <section className="learning-contact-seo-section">
+        <div className="section-container learning-contact-seo-two-column">
+          <div>
+            <span className="contact-kicker">PERSONAL GUIDANCE</span>
+            <h2>Course Counselling &amp; IT Training Enquiries</h2>
+          </div>
+          <div>
+            <p>AILYT supports students, graduates and working learners looking for practical IT training, Data Analytics, programming, computer courses, BCA/MCA support and internship opportunities.</p>
+            <p>Ask about program selection, course fees, classroom learning, hybrid learning and the next available batch before you decide.</p>
+            <a className="learning-contact-whatsapp" href="https://wa.me/918630611232" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="learning-contact-seo-section learning-contact-explore">
+        <div className="section-container">
+          <div className="learning-contact-seo-heading"><span className="contact-kicker">PLAN YOUR ENQUIRY</span><h2>Explore Before You Enquire</h2></div>
+          <div className="learning-contact-explore-grid">
+            <Link to="/data-analyst-course-dehradun">Data Analyst Program</Link>
+            <Link to="/learning/courses/ignou-bca-mca">BCA + MCA Professional Track</Link>
+            <Link to="/learning/internship-programs">Software Development Internship</Link>
+            <Link to="/learning/about#methodology">Teaching Methodology</Link>
+            <Link to="/learning/infrastructure">Learning Infrastructure</Link>
+            <Link to="/learning">Learning Centre</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="learning-contact-seo-section learning-contact-faq">
+        <div className="section-container">
+          <div className="learning-contact-seo-heading"><span className="contact-kicker">QUESTIONS BEFORE YOU START</span><h2>Course Enquiry FAQs</h2></div>
+          <div className="learning-contact-faq-grid">
+            <article><h3>How can I contact AILYT Learning Centre in Dehradun?</h3><p>Submit the enquiry form, use WhatsApp, or contact the Learning Centre team through the details shared on the contact page.</p></article>
+            <article><h3>Can I ask about Data Analytics courses?</h3><p>Yes. You can ask about course content, learning level, batch timings, fees and the practical work included in the Data Analytics program.</p></article>
+            <article><h3>Can BCA and MCA students contact AILYT for support?</h3><p>Yes. BCA and MCA learners can enquire about academic support, programming practice, projects and practical learning guidance.</p></article>
+            <article><h3>Can I ask about computer courses and IT training?</h3><p>Yes. The team can explain available computer courses, programming options, practical IT training and suitable learning paths.</p></article>
+            <article><h3>Does AILYT offer classroom and hybrid learning?</h3><p>Available learning modes depend on the program and batch. Ask the team about current classroom, hybrid or mentor-supported options.</p></article>
+            <article><h3>How quickly will AILYT respond to my enquiry?</h3><p>The team reviews submitted details and responds as soon as possible during working hours. WhatsApp is also available for a direct follow-up.</p></article>
           </div>
         </div>
       </section>

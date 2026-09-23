@@ -1,0 +1,129 @@
+.learning-contact-seo-hero .learning-contact-hero-text h1 {
+  max-width: 760px;
+}
+
+.learning-contact-seo-section {
+  padding: 82px 20px;
+  background: #0f0f0f;
+}
+
+.learning-contact-seo-two-column {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.learning-contact-seo-two-column h2,
+.learning-contact-seo-heading h2 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.2;
+}
+
+.learning-contact-seo-two-column p,
+.learning-contact-faq-grid p {
+  color: #b8b8c7;
+  line-height: 1.8;
+}
+
+.learning-contact-whatsapp {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #d946ef, #ec4899);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+
+.learning-contact-whatsapp:hover {
+  transform: translateY(-2px);
+}
+
+.learning-contact-explore {
+  background: linear-gradient(135deg, #171723, #1a1a2e);
+}
+
+.learning-contact-seo-heading {
+  max-width: 760px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.learning-contact-explore-grid,
+.learning-contact-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.learning-contact-explore-grid a {
+  display: flex;
+  min-height: 86px;
+  align-items: center;
+  padding: 22px;
+  border: 1px solid rgba(217, 70, 239, 0.25);
+  border-radius: 12px;
+  background: rgba(15, 15, 15, 0.48);
+  color: #f0abfc;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.learning-contact-explore-grid a:hover {
+  transform: translateY(-4px);
+  border-color: #d946ef;
+  color: #ffffff;
+}
+
+.learning-contact-faq {
+  background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+}
+
+.learning-contact-faq-grid article {
+  padding: 24px;
+  border: 1px solid rgba(217, 70, 239, 0.22);
+  border-radius: 12px;
+  background: rgba(26, 26, 46, 0.58);
+}
+
+.learning-contact-faq-grid h3 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 1.12rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 1000px) {
+  .learning-contact-seo-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-contact-explore-grid,
+  .learning-contact-faq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .learning-contact-seo-section {
+    padding: 58px 15px;
+  }
+
+  .learning-contact-explore-grid,
+  .learning-contact-faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-contact-whatsapp {
+    width: 100%;
+  }
+}
