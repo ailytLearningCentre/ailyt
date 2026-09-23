@@ -34,6 +34,12 @@ const enquirySchema = new mongoose.Schema(
         'python',
         'data-analytics',
         'tableau',
+        'ignou-bca-mca-support',
+        'software-development-internship',
+        'ignou-bca-counselling',
+        'ignou-mca-counselling',
+        'ignou-bca-program-guide',
+        'ignou-mca-program-guide',
       ],
     },
     learningMode: {
