@@ -261,3 +261,242 @@
     opacity: 1;
   }
 }
+
+/* ==================================================
+   AILYT DATA ANALYST - TYPOGRAPHY SIZE ALIGNMENT
+   Matches the font scale used on existing course pages
+================================================== */
+
+/* Small section labels */
+.da-landing .da-eyebrow,
+.da-landing .da-kicker {
+  font-size: 0.8rem;
+}
+
+/* Hero */
+.da-landing .da-hero h1 {
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+}
+
+.da-landing .da-hero-text {
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+.da-landing .da-chip {
+  font-size: 0.82rem;
+}
+
+/* Buttons */
+.da-landing .da-btn {
+  font-size: 0.9rem;
+}
+
+/* Main section headings */
+.da-landing .da-section-heading h2,
+.da-landing .da-final-cta h2 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+}
+
+.da-landing .da-section-heading > p:last-child {
+  font-size: 1rem;
+}
+
+/* Highlight strip */
+.da-landing .da-highlight strong {
+  font-size: 1.3rem;
+}
+
+.da-landing .da-highlight span:last-child {
+  font-size: 0.9rem;
+}
+
+.da-landing .da-index {
+  font-size: 0.8rem;
+}
+
+/* Audience / Why Analytics / Cards */
+.da-landing .da-soft-card h3,
+.da-landing .da-outline-card h3,
+.da-landing .da-learning-card h3,
+.da-landing .da-project-copy h3,
+.da-landing .da-reason h3 {
+  font-size: 1.3rem;
+}
+
+.da-landing .da-soft-card p,
+.da-landing .da-outline-card p,
+.da-landing .da-project-copy p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* Learning module number */
+.da-landing .da-module-number {
+  font-size: 0.85rem;
+}
+
+/* Topic pills */
+.da-landing .da-topic-list span,
+.da-landing .da-roadmap-topics span {
+  font-size: 0.82rem;
+  padding: 6px 10px;
+}
+
+/* Tools */
+.da-landing .da-core-tools span {
+  font-size: 1.1rem;
+}
+
+.da-landing .da-support-tools span {
+  font-size: 0.85rem;
+}
+
+/* Roadmap */
+.da-landing .da-month {
+  font-size: 0.85rem;
+}
+
+.da-landing .da-roadmap-marker span {
+  font-size: 0.85rem;
+}
+
+.da-landing .da-roadmap-content h3 {
+  font-size: 1.4rem;
+}
+
+/* Curriculum */
+.da-landing .da-accordion-item button > span {
+  font-size: 1rem;
+}
+
+.da-landing .da-accordion-item button b {
+  font-size: 0.85rem;
+}
+
+.da-landing .da-accordion-panel {
+  font-size: 0.9rem;
+}
+
+/* Project tags */
+.da-landing .da-tag-row span {
+  font-size: 0.8rem;
+}
+
+/* Learning Method */
+.da-landing .da-method-grid article > span {
+  font-size: 0.8rem;
+}
+
+.da-landing .da-method-grid h3 {
+  font-size: 1.15rem;
+}
+
+.da-landing .da-method-grid p {
+  font-size: 0.9rem;
+}
+
+/* Centre section */
+.da-landing .da-centre-section p:not(.da-kicker) {
+  font-size: 1rem;
+}
+
+.da-landing .da-centre-details {
+  font-size: 0.9rem;
+}
+
+/* Trainer */
+.da-landing .da-mentor-lead {
+  font-size: 1rem;
+}
+
+.da-landing .da-mentor-facts span {
+  font-size: 0.88rem;
+}
+
+.da-landing .da-mentor-facts b {
+  font-size: 0.9rem;
+}
+
+/* Course at a glance */
+.da-landing .da-glance-grid span {
+  font-size: 0.85rem;
+}
+
+.da-landing .da-glance-grid strong {
+  font-size: 1rem;
+}
+
+/* Portfolio */
+.da-landing .da-portfolio-grid span {
+  font-size: 0.8rem;
+}
+
+.da-landing .da-portfolio-grid strong {
+  font-size: 0.95rem;
+}
+
+/* Student work */
+.da-landing .da-work-placeholder span {
+  font-size: 0.75rem;
+}
+
+.da-landing .da-work-placeholder strong {
+  font-size: 1rem;
+}
+
+/* Final CTA */
+.da-landing .da-final-cta p:not(.da-kicker) {
+  font-size: 1rem;
+}
+
+/* Footer */
+.da-landing .da-footer p,
+.da-landing .da-footer small,
+.da-landing .da-footer-inner > div {
+  font-size: 0.85rem;
+}
+
+/* Syllabus download block */
+.da-landing .da-syllabus-strip h3 {
+  font-size: 1.5rem;
+}
+
+.da-landing .da-syllabus-strip p:not(.da-kicker) {
+  font-size: 0.9rem;
+}
+
+.da-landing .da-syllabus-strip ul {
+  font-size: 0.85rem;
+}
+
+/* Popup / lead form */
+.da-landing .da-modal-heading h2 {
+  font-size: 2rem;
+}
+
+.da-landing .da-modal-heading p:last-child {
+  font-size: 0.9rem;
+}
+
+.da-landing .da-field > span {
+  font-size: 0.85rem;
+}
+
+.da-landing .da-field input,
+.da-landing .da-field select,
+.da-landing .da-field textarea {
+  font-size: 0.9rem;
+}
+
+.da-landing .da-phone-field b {
+  font-size: 0.88rem;
+}
+
+.da-landing .da-consent {
+  font-size: 0.8rem;
+}
+
+.da-landing .da-form-error {
+  font-size: 0.82rem;
+}

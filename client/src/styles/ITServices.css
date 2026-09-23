@@ -29,11 +29,15 @@
   transform: translateY(-2px);
 }
 
-/* Hero Section */
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+
 .itservices-hero {
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
   padding: 80px 20px;
-  min-height: 600px;
+  min-height: 650px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,14 +53,24 @@
   right: -50%;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(217, 70, 239, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(217, 70, 239, 0.1) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
   animation: float 20s infinite ease-in-out;
 }
 
 @keyframes float {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(30px, -30px); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(30px, -30px);
+  }
 }
 
 .itservices-hero-content {
@@ -73,9 +87,13 @@
   font-size: 3.5rem;
   color: #ffffff;
   margin-bottom: 20px;
+  line-height: 1.2;
+
   background: linear-gradient(135deg, #d946ef, #ec4899);
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   background-clip: text;
 }
 
@@ -92,20 +110,23 @@
   flex-wrap: wrap;
 }
 
-.cta-primary, .cta-secondary {
+.cta-primary,
+.cta-secondary {
   padding: 14px 32px;
   font-size: 1rem;
   font-weight: 600;
-  border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .cta-primary {
   background: linear-gradient(135deg, #d946ef, #ec4899);
   color: #ffffff;
+  border: none;
 }
 
 .cta-primary:hover {
@@ -117,8 +138,6 @@
   background: transparent;
   color: #d946ef;
   border: 2px solid #d946ef;
-  text-decoration: none;
-  display: inline-block;
 }
 
 .cta-secondary:hover {
@@ -135,8 +154,15 @@
 .hero-box {
   position: absolute;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(236, 72, 153, 0.1));
+
+  background: linear-gradient(
+    135deg,
+    rgba(217, 70, 239, 0.1),
+    rgba(236, 72, 153, 0.1)
+  );
+
   border: 2px solid rgba(217, 70, 239, 0.3);
+
   animation: box-float 4s ease-in-out infinite;
 }
 
@@ -164,26 +190,36 @@
 }
 
 @keyframes box-float {
-  0%, 100% { transform: translateY(0px) rotateX(0deg); }
-  50% { transform: translateY(-20px) rotateX(5deg); }
+  0%,
+  100% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotateX(5deg);
+  }
 }
 
-/* Services Overview */
-.itservices-services-overview {
-  padding: 80px 20px;
-  background: #0f0f0f;
-}
+
+/* =====================================================
+   COMMON SECTION HEADINGS
+===================================================== */
 
 .itservices-services-overview h2,
+.itservices-about h2,
+.itservices-process h2,
+.itservices-technologies h2,
 .itservices-industries h2,
 .itservices-why h2,
 .itservices-projects h2,
 .itservices-hire-interns h2,
+.itservices-faq h2,
 .itservices-cta h2 {
   font-size: 2.5rem;
   color: #ffffff;
   text-align: center;
   margin-bottom: 15px;
+  line-height: 1.25;
 }
 
 .section-subtitle {
@@ -191,39 +227,110 @@
   color: #b3b3b3;
   font-size: 1.1rem;
   margin-bottom: 50px;
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   ABOUT IT SERVICES
+===================================================== */
+
+.itservices-about {
+  padding: 80px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #0f0f0f 0%,
+    #161625 100%
+  );
+
+  border-bottom: 1px solid rgba(217, 70, 239, 0.25);
+}
+
+.itservices-about .section-container {
+  max-width: 1000px;
+}
+
+.itservices-about p {
+  color: #b3b3b3;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.itservices-about .service-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 1.05rem;
+}
+
+
+/* =====================================================
+   SERVICES OVERVIEW
+===================================================== */
+
+.itservices-services-overview {
+  padding: 80px 20px;
+  background: #0f0f0f;
 }
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(320px, 1fr));
+
   gap: 30px;
 }
 
 .service-card {
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(15, 15, 15, 0.8));
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.8),
+    rgba(15, 15, 15, 0.8)
+  );
+
   border: 1px solid rgba(217, 70, 239, 0.2);
+
   border-radius: 12px;
   padding: 30px;
+
   transition: all 0.3s ease;
+
   position: relative;
   overflow: hidden;
 }
 
 .service-card::before {
   content: '';
+
   position: absolute;
+
   top: 0;
   left: 0;
+
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #d946ef, #ec4899);
+
+  background: linear-gradient(
+    90deg,
+    #d946ef,
+    #ec4899
+  );
+
   transition: height 0.3s ease;
 }
 
 .service-card:hover {
   border-color: rgba(217, 70, 239, 0.5);
+
   transform: translateY(-10px);
-  background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(236, 72, 153, 0.05));
+
+  background: linear-gradient(
+    135deg,
+    rgba(217, 70, 239, 0.1),
+    rgba(236, 72, 153, 0.05)
+  );
 }
 
 .service-card:hover::before {
@@ -233,14 +340,24 @@
 .service-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #d946ef, #ec4899);
+
+  background: linear-gradient(
+    135deg,
+    #d946ef,
+    #ec4899
+  );
+
   border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   color: #ffffff;
+
   font-weight: 700;
   font-size: 1.5rem;
+
   margin-bottom: 20px;
 }
 
@@ -248,11 +365,12 @@
   font-size: 1.3rem;
   color: #ffffff;
   margin-bottom: 15px;
+  line-height: 1.35;
 }
 
 .service-card p {
   color: #b3b3b3;
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 20px;
 }
 
@@ -267,34 +385,153 @@
   color: #ec4899;
 }
 
-/* Industries Section */
+
+/* =====================================================
+   DEVELOPMENT PROCESS
+===================================================== */
+
+.itservices-process {
+  padding: 80px 20px;
+  background: #0f0f0f;
+}
+
+.itservices-process .why-card {
+  min-height: 230px;
+}
+
+.itservices-process .why-icon {
+  font-size: 2.3rem;
+}
+
+
+/* =====================================================
+   TECHNOLOGIES
+===================================================== */
+
+.itservices-technologies {
+  padding: 80px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #0f0f0f 0%,
+    #1a1a2e 100%
+  );
+
+  border-top: 2px solid #d946ef;
+  border-bottom: 2px solid #d946ef;
+}
+
+.itservices-technologies
+.section-container
+> p:not(.section-subtitle) {
+
+  max-width: 900px;
+
+  margin: 0 auto 40px;
+
+  text-align: center;
+
+  color: #b3b3b3;
+
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.technologies-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(160px, 1fr));
+
+  gap: 18px;
+
+  margin-top: 30px;
+}
+
+.technology-card {
+  padding: 18px 15px;
+
+  background: rgba(26, 26, 46, 0.7);
+
+  border: 1px solid rgba(217, 70, 239, 0.3);
+
+  border-radius: 10px;
+
+  color: #ffffff;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  text-align: center;
+
+  transition: all 0.3s ease;
+}
+
+.technology-card:hover {
+  border-color: #d946ef;
+
+  background: rgba(217, 70, 239, 0.12);
+
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(217, 70, 239, 0.15);
+}
+
+
+/* =====================================================
+   INDUSTRIES
+===================================================== */
+
 .itservices-industries {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+
+  background: linear-gradient(
+    135deg,
+    #0f0f0f 0%,
+    #1a1a2e 100%
+  );
+
   border-top: 2px solid #d946ef;
   border-bottom: 2px solid #d946ef;
 }
 
 .industries-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(280px, 1fr));
+
   gap: 30px;
 }
 
 .industry-card {
   background: rgba(26, 26, 46, 0.6);
-  border: 1px solid rgba(217, 70, 239, 0.3);
+
+  border:
+    1px solid
+    rgba(217, 70, 239, 0.3);
+
   border-radius: 12px;
+
   padding: 40px 30px;
+
   text-align: center;
+
   transition: all 0.3s ease;
 }
 
 .industry-card:hover {
   border-color: #d946ef;
+
   background: rgba(26, 26, 46, 0.9);
+
   transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(217, 70, 239, 0.2);
+
+  box-shadow:
+    0 15px 40px
+    rgba(217, 70, 239, 0.2);
 }
 
 .industry-icon {
@@ -310,10 +547,25 @@
 
 .industry-card p {
   color: #b3b3b3;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-/* Why AILYT Section */
+.itservices-industries
+> .section-container
+> .service-link {
+
+  display: block;
+
+  width: fit-content;
+
+  margin: 35px auto 0;
+}
+
+
+/* =====================================================
+   WHY AILYT
+===================================================== */
+
 .itservices-why {
   padding: 80px 20px;
   background: #0f0f0f;
@@ -321,22 +573,42 @@
 
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(300px, 1fr));
+
   gap: 30px;
 }
 
 .why-card {
-  background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(236, 72, 153, 0.05));
-  border: 1px solid rgba(217, 70, 239, 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(217, 70, 239, 0.1),
+    rgba(236, 72, 153, 0.05)
+  );
+
+  border:
+    1px solid
+    rgba(217, 70, 239, 0.3);
+
   border-radius: 12px;
+
   padding: 30px;
+
   text-align: center;
+
   transition: all 0.3s ease;
 }
 
 .why-card:hover {
   border-color: #d946ef;
-  background: linear-gradient(135deg, rgba(217, 70, 239, 0.2), rgba(236, 72, 153, 0.1));
+
+  background: linear-gradient(
+    135deg,
+    rgba(217, 70, 239, 0.2),
+    rgba(236, 72, 153, 0.1)
+  );
+
   transform: translateY(-8px);
 }
 
@@ -349,38 +621,61 @@
   font-size: 1.2rem;
   color: #ffffff;
   margin-bottom: 10px;
+  line-height: 1.35;
 }
 
 .why-card p {
   color: #b3b3b3;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-/* Projects Section */
+
+/* =====================================================
+   PROJECTS
+===================================================== */
+
 .itservices-projects {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+
+  background: linear-gradient(
+    135deg,
+    #0f0f0f 0%,
+    #1a1a2e 100%
+  );
+
   border-top: 2px solid #d946ef;
   border-bottom: 2px solid #d946ef;
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(300px, 1fr));
+
   gap: 30px;
 }
 
 .project-card {
   background: rgba(26, 26, 46, 0.6);
-  border: 1px solid rgba(217, 70, 239, 0.3);
+
+  border:
+    1px solid
+    rgba(217, 70, 239, 0.3);
+
   border-radius: 12px;
+
   padding: 30px;
+
   transition: all 0.3s ease;
 }
 
 .project-card:hover {
   border-color: #d946ef;
-  background: rgba(26, 26, 46, 0.9);
+
+  background:
+    rgba(26, 26, 46, 0.9);
+
   transform: translateY(-8px);
 }
 
@@ -392,8 +687,12 @@
 
 .project-card p {
   color: #b3b3b3;
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 20px;
+}
+
+.project-card p + p {
+  margin-top: -5px;
 }
 
 .project-card a {
@@ -406,7 +705,11 @@
   color: #ec4899;
 }
 
-/* Hire Interns Section */
+
+/* =====================================================
+   HIRE INTERNS
+===================================================== */
+
 .itservices-hire-interns {
   padding: 80px 20px;
   background: #0f0f0f;
@@ -414,8 +717,11 @@
 
 .hire-content {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 60px;
+
   align-items: center;
 }
 
@@ -426,49 +732,74 @@
 
 .hire-text p {
   color: #b3b3b3;
+
   font-size: 1.05rem;
+
   line-height: 1.8;
+
   margin-bottom: 30px;
 }
 
 .hire-features {
   list-style: none;
+
   margin-bottom: 30px;
+
+  padding-left: 0;
 }
 
 .hire-features li {
   color: #b3b3b3;
+
   padding: 12px 0;
+
   padding-left: 30px;
+
   position: relative;
+
   line-height: 1.6;
 }
 
 .hire-features li::before {
   content: '✓';
+
   position: absolute;
+
   left: 0;
+
   color: #d946ef;
+
   font-weight: 700;
+
   font-size: 1.2rem;
 }
 
 .hire-visual {
   position: relative;
+
   height: 350px;
 }
 
 .hire-box {
   position: absolute;
+
   border-radius: 12px;
-  border: 2px solid rgba(217, 70, 239, 0.3);
-  background: rgba(217, 70, 239, 0.05);
-  animation: box-float 5s ease-in-out infinite;
+
+  border:
+    2px solid
+    rgba(217, 70, 239, 0.3);
+
+  background:
+    rgba(217, 70, 239, 0.05);
+
+  animation:
+    box-float 5s ease-in-out infinite;
 }
 
 .hire-box-1 {
   width: 180px;
   height: 180px;
+
   top: 0;
   right: 0;
 }
@@ -476,15 +807,99 @@
 .hire-box-2 {
   width: 220px;
   height: 100px;
+
   bottom: 20px;
   left: 20px;
+
   animation-delay: 2s;
 }
 
-/* CTA Section */
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+.itservices-faq {
+  padding: 80px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #0f0f0f 0%,
+    #161625 100%
+  );
+
+  border-top:
+    1px solid
+    rgba(217, 70, 239, 0.25);
+}
+
+.faq-list {
+  max-width: 950px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  gap: 20px;
+}
+
+.faq-item {
+  padding: 28px 30px;
+
+  background:
+    rgba(26, 26, 46, 0.65);
+
+  border:
+    1px solid
+    rgba(217, 70, 239, 0.25);
+
+  border-radius: 12px;
+
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color:
+    rgba(217, 70, 239, 0.65);
+
+  background:
+    rgba(26, 26, 46, 0.9);
+
+  transform: translateY(-3px);
+}
+
+.faq-item h3 {
+  color: #ffffff;
+
+  font-size: 1.15rem;
+
+  margin-bottom: 12px;
+
+  line-height: 1.4;
+}
+
+.faq-item p {
+  color: #b3b3b3;
+
+  line-height: 1.8;
+
+  margin: 0;
+}
+
+
+/* =====================================================
+   CTA SECTION
+===================================================== */
+
 .itservices-cta {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
+
+  background: linear-gradient(
+    135deg,
+    #d946ef 0%,
+    #ec4899 100%
+  );
+
   text-align: center;
 }
 
@@ -494,15 +909,23 @@
 }
 
 .itservices-cta p {
-  color: rgba(255, 255, 255, 0.9);
+  color:
+    rgba(255, 255, 255, 0.9);
+
   font-size: 1.1rem;
+
+  line-height: 1.7;
+
   margin-bottom: 40px;
 }
 
 .cta-buttons {
   display: flex;
+
   gap: 20px;
+
   justify-content: center;
+
   flex-wrap: wrap;
 }
 
@@ -512,24 +935,54 @@
 }
 
 .cta-buttons .cta-primary:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background:
+    rgba(255, 255, 255, 0.9);
 }
 
 .cta-buttons .cta-secondary {
   background: transparent;
+
   color: #ffffff;
+
   border-color: #ffffff;
 }
 
 .cta-buttons .cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background:
+    rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive Design */
+
+/* =====================================================
+   GENERAL READABILITY
+===================================================== */
+
+.itservices-page p {
+  word-break: normal;
+}
+
+.itservices-page h2 {
+  line-height: 1.25;
+}
+
+.itservices-page h3 {
+  line-height: 1.35;
+}
+
+
+/* =====================================================
+   RESPONSIVE DESIGN
+===================================================== */
+
 @media (max-width: 768px) {
+
   .itservices-hero-content {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .itservices-hero {
+    min-height: auto;
   }
 
   .itservices-hero-text h1 {
@@ -538,6 +991,10 @@
 
   .itservices-hero-text p {
     font-size: 1rem;
+  }
+
+  .itservices-hero-visual {
+    height: 300px;
   }
 
   .hire-content {
@@ -549,12 +1006,27 @@
     text-align: center;
   }
 
-  h2 {
+  .itservices-services-overview h2,
+  .itservices-about h2,
+  .itservices-process h2,
+  .itservices-technologies h2,
+  .itservices-industries h2,
+  .itservices-why h2,
+  .itservices-projects h2,
+  .itservices-hire-interns h2,
+  .itservices-faq h2,
+  .itservices-cta h2 {
     font-size: 1.8rem;
   }
 }
 
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media (max-width: 480px) {
+
   .itservices-hero {
     padding: 50px 15px;
     min-height: 400px;
@@ -564,11 +1036,51 @@
     font-size: 2rem;
   }
 
+  .itservices-hero-text p {
+    font-size: 0.95rem;
+  }
+
+  .itservices-hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .itservices-hero-ctas .cta-primary,
+  .itservices-hero-ctas .cta-secondary {
+    text-align: center;
+    width: 100%;
+  }
+
+  .itservices-hero-visual {
+    height: 250px;
+  }
+
+  .hero-box-1 {
+    width: 110px;
+    height: 110px;
+  }
+
+  .hero-box-2 {
+    width: 150px;
+    height: 65px;
+    top: 130px;
+    right: 60px;
+  }
+
+  .hero-box-3 {
+    width: 90px;
+    height: 150px;
+  }
+
   .itservices-services-overview,
+  .itservices-about,
+  .itservices-process,
+  .itservices-technologies,
   .itservices-industries,
   .itservices-why,
   .itservices-projects,
   .itservices-hire-interns,
+  .itservices-faq,
   .itservices-cta {
     padding: 50px 15px;
   }
@@ -580,11 +1092,75 @@
     grid-template-columns: 1fr;
   }
 
-  h2 {
+  .technologies-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 12px;
+  }
+
+  .technology-card {
+    padding: 15px 10px;
+
+    font-size: 0.9rem;
+  }
+
+  .service-card,
+  .why-card,
+  .project-card,
+  .industry-card {
+    padding: 25px 20px;
+  }
+
+  .faq-item {
+    padding: 22px 20px;
+  }
+
+  .itservices-about p {
+    font-size: 0.98rem;
+    line-height: 1.8;
+  }
+
+  .itservices-services-overview h2,
+  .itservices-about h2,
+  .itservices-process h2,
+  .itservices-technologies h2,
+  .itservices-industries h2,
+  .itservices-why h2,
+  .itservices-projects h2,
+  .itservices-hire-interns h2,
+  .itservices-faq h2,
+  .itservices-cta h2 {
     font-size: 1.5rem;
   }
 
   .section-subtitle {
     font-size: 0.95rem;
+    margin-bottom: 35px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta-buttons .cta-primary,
+  .cta-buttons .cta-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hire-visual {
+    height: 260px;
+  }
+
+  .hire-box-1 {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hire-box-2 {
+    width: 180px;
+    height: 85px;
   }
 }

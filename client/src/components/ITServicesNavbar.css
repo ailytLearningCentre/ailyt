@@ -98,3 +98,143 @@
     display: none;
   }
 }
+
+/* =========================================================
+   IT SERVICES MOBILE NAVIGATION
+   Paste this at the END of ITServicesNavbar.css
+   ========================================================= */
+
+.itservices-mobile-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  position: relative;
+  z-index: 10002;
+}
+
+.itservices-mobile-toggle span {
+  display: block;
+  width: 27px;
+  height: 3px;
+  border-radius: 999px;
+  background: #ffffff;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* Turn hamburger into X when menu is open */
+.itservices-mobile-toggle.is-open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.itservices-mobile-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.itservices-mobile-toggle.is-open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .itservices-navbar {
+    position: relative;
+    z-index: 10000;
+  }
+
+  .itservices-navbar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .itservices-mobile-toggle {
+    display: flex;
+  }
+
+  .itservices-nav-menu {
+    display: none !important;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    margin: 0;
+    padding: 10px 0 14px;
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    background: #111111;
+    border-top: 1px solid #d946ef;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+
+    z-index: 10001;
+  }
+
+  .itservices-nav-menu.itservices-nav-menu-open {
+    display: flex !important;
+  }
+
+  .itservices-nav-item {
+    width: 100%;
+  }
+
+  .itservices-nav-item > a,
+  .itservices-link-btn {
+    display: block;
+    width: 100%;
+    padding: 13px 20px;
+
+    text-align: left;
+    color: #ffffff;
+  }
+
+  .itservices-link-btn {
+    border: 0;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .itservices-dropdown-menu {
+    position: static !important;
+    width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 5px 0 8px 14px;
+
+    border: 0;
+    box-shadow: none;
+    background: #1a1a2e;
+  }
+
+  .itservices-dropdown-menu a {
+    display: block;
+    width: 100%;
+    padding: 11px 20px;
+  }
+}
